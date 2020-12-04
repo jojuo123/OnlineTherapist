@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "615981616393",
+    "project_id": "onlinetherapist-ff225",
+    "storage_bucket": "onlinetherapist-ff225.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615981616393:android:5c6039995e3a0b7fbe17d8",
+        "android_client_info": {
+          "package_name": "com.example.onlinetherapist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615981616393-roeel5hrfscprb3qpqs1orgem8ul2cti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.onlinetherapist",
+            "certificate_hash": "9a079ba4257bfc47e2e44641ebe50c7dcf352b5b"
+          }
+        },
+        {
+          "client_id": "615981616393-3qp74rkggq05fa8tla031mvs4d61568g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC64E47Ap4d5399Rupcuzp4iSZzsyxyU5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615981616393-3qp74rkggq05fa8tla031mvs4d61568g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
