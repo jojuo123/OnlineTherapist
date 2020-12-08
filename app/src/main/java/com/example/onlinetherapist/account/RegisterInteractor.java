@@ -1,9 +1,12 @@
 package com.example.onlinetherapist.account;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.onlinetherapist.FirebaseManagement;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,8 +25,11 @@ import java.util.Map;
 
 public class RegisterInteractor implements IRegisterPresenter.Interactor {
     private IRegisterPresenter.onRegistrationListener onRegistrationListener;
+    ProgressDialog progressDialog;
+    private FirebaseManagement firebaseManagement;
     public RegisterInteractor(IRegisterPresenter.onRegistrationListener onRegistrationListener){
         this.onRegistrationListener = onRegistrationListener;
+        firebaseManagement = FirebaseManagement.getInstance();
     }
 
     @Override
@@ -48,19 +54,16 @@ public class RegisterInteractor implements IRegisterPresenter.Interactor {
             onRegistrationListener.onFailed("Password and Confirm Password dont match!");
             return;
         }
-        if(!check_exist(username))
-        {
-            onRegistrationListener.onFailed("Username is too weak. Please try another one!");
-            return;
-        }
         int year = birth.get(Calendar.YEAR);
+
         if(year >= 2008){
             onRegistrationListener.onFailed("Sorry. You need permission from parents!");
             return;
         }
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String dob = dateFormat.format(birth.getTime());
-        upload_infor(activity, username, password, sex, height, weight, dob);
+        firebaseManagement.check_username(activity, username, password, sex, height, weight, dob);
+//        check_exist(activity, username, password, sex, height, weight, dob);
     }
 
     @Override
@@ -80,12 +83,16 @@ public class RegisterInteractor implements IRegisterPresenter.Interactor {
                     @Override
                     public void onSuccess(Void aVoid) {
                         onRegistrationListener.onSuccess("Success Create Account");
+
+                        progressDialog.dismiss();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         onRegistrationListener.onFailed("Failed Create Account. Please Check Internet Connection");
+                        progressDialog.dismiss();
                     }
                 });
     }
@@ -94,24 +101,5 @@ public class RegisterInteractor implements IRegisterPresenter.Interactor {
     public void firebase_registration(Activity activity, String username, String password) {
 
     }
-    public boolean check_exist(final String username){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        final boolean[] result = new boolean[1];
-        result[0] = true;
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child("Patients").child(username).exists())
-                    result[0] = false;
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return result[0];
-    }
 }

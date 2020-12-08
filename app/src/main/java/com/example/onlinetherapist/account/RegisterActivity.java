@@ -60,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterPres
                 height = Integer.parseInt(reg_height.getText().toString());
                 weight = Integer.parseInt(reg_weight.getText().toString());
 
+
                 init_register(username, pass, cf_pass, sex,
                         height, weight, birth);
             }
