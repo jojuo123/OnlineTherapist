@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".account.RegisterActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_logo"/>
+
+
+    <EditText
+        android:layout_margin="10dp"
+
+        android:id="@+id/reg_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/username"
+        android:autofillHints="@string/username"
+        />
+
+    <EditText
+        android:layout_margin="10dp"
+        android:inputType="textPassword"
+        android:id="@+id/reg_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:autofillHints="@string/password"
+        />
+    <EditText
+        android:layout_margin="10dp"
+        android:inputType="textPassword"
+        android:id="@+id/reg_cf_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/cf_password"
+        android:autofillHints="@string/cf_password"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_of_birth" />
+
+            <DatePicker
+                android:id="@+id/reg_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:inputType="date" />
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reg_sex"
+            />
+        <RadioButton
+            android:layout_marginStart="10dp"
+            android:id="@+id/sex_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:onClick="onGenderClick"
+            />
+        <RadioButton
+            android:layout_marginStart="30dp"
+            android:id="@+id/sex_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:onClick="onGenderClick"
+            />
+        <RadioButton
+            android:layout_marginStart="30dp"
+            android:id="@+id/sex_others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Others"
+            android:onClick="onGenderClick"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <EditText
+
+            android:id="@+id/reg_height"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/height"
+            android:autofillHints="@string/height"
+            android:inputType="number"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(cm)"
+            android:layout_marginEnd="10dp"
+            />
+        <EditText
+            android:layout_marginStart="10dp"
+            android:id="@+id/reg_weight"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/weight"
+            android:autofillHints="@string/weight"
+            android:inputType="number"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Kg)"
+
+            />
+    </LinearLayout>
+    <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/reg_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/reg_submit"
+        android:textSize="20sp"
+        />
+    <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/reg_back_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/already_has_account"
+        android:textSize="20sp"
+        />
+    </LinearLayout>
+</ScrollView>
