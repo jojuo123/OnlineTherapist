@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
         onAuthorizeChange();
     }
 
+
     private void onAuthorizeChange() {
         ChangeAuthority=findViewById(R.id.changeAuthor);
         RegButton=findViewById(R.id.register);
@@ -73,6 +74,17 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
         RegButton=findViewById(R.id.register);
         ChangeAuthority= findViewById(R.id.changeAuthor);
     }
+
+    @Override
+    public void LogInAdmin() {
+        //setContentView(R.layout.activity_admin__login);
+        username=findViewById(R.id.editTextUsername);
+        password=findViewById(R.id.editTextPassword);
+        saveLoginCheckBox=findViewById(R.id.rememberlog);
+        LoginButton= findViewById(R.id.login);
+        ChangeAuthority= findViewById(R.id.changeAuthor);
+    }
+
     private void checkRememberBox(){
         saveLoginCheckBox=findViewById(R.id.rememberlog);
         saveLoginCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -114,8 +126,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
                 }
                 log_username=username.getText().toString();
                 log_password=password.getText().toString();
+
                 //Toast.makeText(LoginActivity.this,log_username + " " + log_password,Toast.LENGTH_LONG).show();
                 //
+                saveUserName(log_username);
                 if(flag==0) presenter.authorize(LoginActivity.this,log_username,log_password);
                 else{
                     presenter.Adminauthorize(LoginActivity.this,log_username,log_password);
@@ -123,17 +137,15 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
             }
         });
     }
-
-
-    @Override
-    public void LogInAdmin() {
-        //setContentView(R.layout.activity_admin__login);
-        username=findViewById(R.id.editTextUsername);
-        password=findViewById(R.id.editTextPassword);
-        saveLoginCheckBox=findViewById(R.id.rememberlog);
-        LoginButton= findViewById(R.id.login);
-        ChangeAuthority= findViewById(R.id.changeAuthor);
+    public void saveUserName(String username){
+        SharedPreferences savedUsername=getSharedPreferences("SavedUsername",MODE_PRIVATE);
+        SharedPreferences.Editor editor=savedUsername.edit();
+        editor.putString("username",username);
+        editor.apply();
     }
+
+
+
 
     @Override
     public void navigatetoMainMenu() {

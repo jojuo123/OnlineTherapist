@@ -3,12 +3,14 @@ package com.example.onlinetherapist;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.onlinetherapist.Login.Admin;
 import com.example.onlinetherapist.Login.Patient;
+import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -93,6 +95,7 @@ public class FirebaseManagement {
                 });
     }
     public void doSignIn(final Activity activity, final String username, final String password) {
+        final String Loginstate="Login";
         Query query= FirebaseDatabase.getInstance().getReference("Patients")
                 .orderByChild("username")
                 .equalTo(username);
@@ -105,6 +108,7 @@ public class FirebaseManagement {
                         assert p != null;
                         if (p.getPassword().equals(password)) {
                             Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
+                            checkActive(activity,username,Loginstate);
                             Intent intent = new Intent(activity, MainActivity.class);
                             activity.startActivity(intent);
                         }
@@ -148,4 +152,47 @@ public class FirebaseManagement {
             }
         });
     }
+    public void checkActive(final Activity activity, final String username, final String state){
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child("Active").hasChild(username)){//This account is Online and one can log out
+                    if(state.equals("Login")) {
+                        Toast.makeText(activity, "Username Already Login. Please Use Another Account!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else if(state.equals("Logout")){
+                        databaseReference.child("Active").child(username).setValue(null);
+                        //remove account from Active-->make it Offline.
+                    }
+                    else{
+                        Toast.makeText(activity, "Illegal State",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                //This account is Offline and one can log in
+                else {
+                    if (state.equals("Login")) {
+                        databaseReference.child("Active").child(username).push().setValue("On");
+                        Intent intent = new Intent(activity, MainActivity.class);
+                        activity.startActivity(intent);
+                    }
+                    else if (state.equals("Logout")) {
+                        Toast.makeText(activity, "Username are not login. These must be bug!",
+                                Toast.LENGTH_SHORT).show();
+                        //remove account from Active-->make it Offline.
+                    }
+                    else {
+                        Toast.makeText(activity, "Illegal State",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
