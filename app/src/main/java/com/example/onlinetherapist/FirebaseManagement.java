@@ -4,28 +4,40 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 
 import com.example.onlinetherapist.Login.Admin;
 import com.example.onlinetherapist.Login.Patient;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
+import com.example.onlinetherapist.homescreen.HomeActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class FirebaseManagement {
     private DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
+    boolean LoggedOut = false;
+    boolean FlagLoggout;
+
+
     private static class SingletonHolder{
         private static final FirebaseManagement INSTANCE = new FirebaseManagement();
     }
@@ -94,7 +106,9 @@ public class FirebaseManagement {
                     }
                 });
     }
+
     public void doSignIn(final Activity activity, final String username, final String password) {
+
         final String Loginstate="Login";
         Query query= FirebaseDatabase.getInstance().getReference("Patients")
                 .orderByChild("username")
@@ -108,8 +122,8 @@ public class FirebaseManagement {
                         assert p != null;
                         if (p.getPassword().equals(password)) {
                             Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
-                            checkActive(activity,username,Loginstate);
-                            Intent intent = new Intent(activity, MainActivity.class);
+
+                            Intent intent = new Intent(activity, HomeActivity.class);
                             activity.startActivity(intent);
                         }
                     }
@@ -124,6 +138,7 @@ public class FirebaseManagement {
             }
         });
     }
+
     public void doSignInAdmin(final Activity activity, final String username, final String password) {
         Query query= FirebaseDatabase.getInstance().getReference("Therapists")
                 .orderByChild("username")
@@ -152,47 +167,127 @@ public class FirebaseManagement {
             }
         });
     }
-    public void checkActive(final Activity activity, final String username, final String state){
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child("Active").hasChild(username)){//This account is Online and one can log out
-                    if(state.equals("Login")) {
-                        Toast.makeText(activity, "Username Already Login. Please Use Another Account!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    else if(state.equals("Logout")){
-                        databaseReference.child("Active").child(username).setValue(null);
-                        //remove account from Active-->make it Offline.
-                    }
-                    else{
-                        Toast.makeText(activity, "Illegal State",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-                //This account is Offline and one can log in
-                else {
-                    if (state.equals("Login")) {
-                        databaseReference.child("Active").child(username).push().setValue("On");
-                        Intent intent = new Intent(activity, MainActivity.class);
-                        activity.startActivity(intent);
-                    }
-                    else if (state.equals("Logout")) {
-                        Toast.makeText(activity, "Username are not login. These must be bug!",
-                                Toast.LENGTH_SHORT).show();
-                        //remove account from Active-->make it Offline.
-                    }
-                    else {
-                        Toast.makeText(activity, "Illegal State",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+//    public void checkActive(final Activity activity, final String username, final String state){
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.child("Active").hasChild(username)){//This account is Online and one can log out
+//                    if(state.equals("Login")) {
+//                        Toast.makeText(activity, "Username Already Login. Please Use Another Account!",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if(state.equals("Logout")){
+//                        databaseReference.child("Active").child(username).setValue(null);
+//                        //remove account from Active-->make it Offline.
+//                    }
+//                    else{
+//                        Toast.makeText(activity, "Illegal State",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                //This account is Offline and one can log in
+//                else {
+//                    if (state.equals("Login")) {
+//                        databaseReference.child("Active").child(username).push().setValue("On");
+//                        Intent intent = new Intent(activity, MainActivity.class);
+//                        activity.startActivity(intent);
+//                    }
+//                    else if (state.equals("Logout")) {
+//                        Toast.makeText(activity, "Username are not login. These must be bug!",
+//                                Toast.LENGTH_SHORT).show();
+//                        //remove account from Active-->make it Offline.
+//                    }
+//                    else {
+//                        Toast.makeText(activity, "Illegal State",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
+
+
+    public void SendFCMTokenPatient(final String uname)
+    {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful())
+                {
+                    Log.e("FCM", "fail to fetch fcm");
+                    return;
+                }
+                String token = task.getResult();
+                SendFCMTokenPatient(uname, token);
             }
         });
     }
 
+    public void SendFCMTokenPatient(String uname, String token)
+    {
+        DatabaseReference databaseReference;
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.child(Constant.PATIENT_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(token);
+    }
+
+    public interface ILogoutFB
+    {
+        void onSuccess();
+        void onFailure();
+    }
+
+    public class LogoutClass
+    {
+        public void PatientLogout(String uname, final FirebaseManagement.ILogoutFB listener)
+        {
+            DatabaseReference databaseReference;
+            Log.e("name", uname);
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child(Constant.PATIENT_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    listener.onSuccess();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    listener.onFailure();
+                }
+            });
+        }
+    }
+
+    public boolean PatientLogout(final Activity activity, String uname) {
+        LoggedOut = false;
+        FlagLoggout = false;
+        new LogoutClass().PatientLogout(uname, new ILogoutFB() {
+            @Override
+            public void onSuccess() {
+                LoggedOut = true;
+                Log.d("success", "LO suc");
+                SharedPreferences preferences = activity.getSharedPreferences("checkbox", MODE_PRIVATE);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString("remember","false");
+                editor.putString("remember and login","false");
+                editor.apply();
+                activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
+                activity.finish();
+            }
+
+            @Override
+            public void onFailure() {
+                LoggedOut = false;
+                Log.d("fail", "LO fai");
+                FlagLoggout = true;
+            }
+        });
+        Log.d("return", String.valueOf(LoggedOut));
+        return LoggedOut;
+    }
 }

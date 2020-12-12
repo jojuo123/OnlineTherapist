@@ -147,6 +147,7 @@
             />
     </LinearLayout>
     <Button
+        android:background="@android:color/transparent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="center"
@@ -156,15 +157,16 @@
         android:text="@string/reg_submit"
         android:textSize="20sp"
         />
-    <Button
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_gravity="center"
-        android:id="@+id/reg_back_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/already_has_account"
-        android:textSize="20sp"
-        />
+        <Button
+            android:background="@android:color/transparent"
+            android:id="@+id/reg_back_login"
+            android:onClick="onRegBackLoginClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/already_has_account"
+            android:textSize="20sp" />
     </LinearLayout>
 </ScrollView>
