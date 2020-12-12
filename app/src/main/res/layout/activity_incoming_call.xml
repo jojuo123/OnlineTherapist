@@ -33,21 +33,19 @@
             android:orientation="vertical"
             android:gravity="center">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_account_circle"
-            android:contentDescription="@string/todo" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:text="@string/therapist"/>
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_account_circle"
+                android:contentDescription="@string/todo" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:text="@string/therapist"/>
         </LinearLayout>
-
-
 
         <RelativeLayout
             android:layout_width="fill_parent"
