@@ -13,17 +13,27 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity"></activity>
+        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity"/>
+
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />
         <activity android:name=".homescreen.HomeActivity" />
         <activity android:name=".videocall.VideoCallActivity" />
         <activity android:name=".appointment.ViewAppointmentActivity" />
         <activity android:name=".appointment.BookAppointmentActivity" />
+        <activity
+            android:name=".Login.UI.LoginActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".account.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
