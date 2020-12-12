@@ -3,6 +3,7 @@ package com.example.onlinetherapist.account;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.example.onlinetherapist.R;
 
 import java.util.Calendar;
@@ -108,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterPres
     @Override
     public void onRegisterSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     public void initViews()
@@ -147,5 +150,9 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterPres
                 reg_sex = -1;
                 break;
         }
+    }
+
+    public void onRegBackLoginClick(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

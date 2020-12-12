@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.onlinetherapist.Login.LoginPresenter;
 import com.example.onlinetherapist.MainActivity;
 import com.example.onlinetherapist.R;
+import com.example.onlinetherapist.account.RegisterActivity;
+import com.example.onlinetherapist.homescreen.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView{
     private CheckBox saveLoginCheckBox;
@@ -149,8 +151,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public void navigatetoMainMenu() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
 
+    public void onRegisterClick(View view) {
+        startActivity(new Intent(this, RegisterActivity.class));
+    }
 }
