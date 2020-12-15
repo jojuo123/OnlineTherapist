@@ -29,7 +29,7 @@ public class OutgoingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_outgoing);
+        setContentView(R.layout.activity_upcoming_call);
 
         InitVariable();
 //        Log.e("type", meetingType);

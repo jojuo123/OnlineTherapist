@@ -39,7 +39,7 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
     private void initButton() {
         this.findViewById(R.id.btnVidCallTherapist).setOnClickListener(view -> initiateVideoMeetingToTherapist(therapist));
 
-        this.findViewById(R.id.btnAudioCallTherapist).setOnClickListener(view -> initiateAudioMeetingToTherapist(therapist));
+        //this.findViewById(R.id.btnAudioCallTherapist).setOnClickListener(view -> initiateAudioMeetingToTherapist(therapist));
     }
 
     private void initVariable() {
@@ -83,7 +83,7 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
     public void displayAppointment(){
         timeAppointment = findViewById(R.id.time_appointment);
         dateAppointment = findViewById(R.id.date_appointment);
-        statusAppointment = findViewById(R.id.status_appointment);
+        //statusAppointment = findViewById(R.id.status_appointment);
 
         presenter.retrieveAppointment(this, timeAppointment, dateAppointment);
 
