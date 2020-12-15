@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.onlinetherapist">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,19 +14,27 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity"/>
-
+        <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity"></activity>
+        <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
+        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity" />
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />
         <activity android:name=".homescreen.HomeActivity" />
         <activity android:name=".videocall.VideoCallActivity" />
-        <activity android:name=".appointment.ViewAppointmentActivity" />
+        <activity android:name=".appointment.ViewAppointmentActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity android:name=".appointment.BookAppointmentActivity" />
         <activity
             android:name=".Login.UI.LoginActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation">
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,12 +42,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
 
-        <service android:name=".MessagingService"
+        <service
+            android:name=".MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -49,4 +49,5 @@ public class TimeSlotModel {
     {
         return new TimeRowModel("1/12/2020",true,true);
     }
+
 }

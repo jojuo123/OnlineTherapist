@@ -10,4 +10,9 @@
     <string name="reg_submit">Submit</string>
     <string name="reg_sex">Sex</string>
     <string name="already_has_account">Already Has Account</string>
+    <string name="incoming_call">Incoming Call</string>
+    <string name="therapist">Therapist</string>
+    <string name="todo">TODO</string>
+    <string name="calling">Calling…</string>
+    <string name="patient">Patient</string>
 </resources>

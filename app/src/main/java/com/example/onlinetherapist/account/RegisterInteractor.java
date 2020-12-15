@@ -3,10 +3,12 @@ package com.example.onlinetherapist.account;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.onlinetherapist.FirebaseManagement;
+import com.example.onlinetherapist.onReadDataListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,8 +35,8 @@ public class RegisterInteractor implements IRegisterPresenter.Interactor {
     }
 
     @Override
-    public void validate_infor(Activity activity, String username, String password,
-                               String cf_password, int sex, int height, int weight, Calendar birth) {
+    public void validate_infor(final Activity activity, final String username, final String password,
+                               String cf_password, final int sex, final int height, final int weight, Calendar birth) {
         if (username.isEmpty() || password.isEmpty() || cf_password.isEmpty() || sex == -1 || String.valueOf(height).isEmpty()
                 || String.valueOf(weight).isEmpty())
         {
@@ -61,8 +63,32 @@ public class RegisterInteractor implements IRegisterPresenter.Interactor {
             return;
         }
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        String dob = dateFormat.format(birth.getTime());
-        firebaseManagement.check_username(activity, username, password, sex, height, weight, dob);
+        final String dob = dateFormat.format(birth.getTime());
+        //firebaseManagement.check_username(activity, username, password, sex, height, weight, dob);
+        firebaseManagement.getUsernameData(new onReadDataListener() {
+            ProgressDialog progressDialog = new ProgressDialog(activity);
+            @Override
+            public void onStart() {
+                progressDialog.setMessage("Please Wait..");
+                progressDialog.show();
+            }
+
+            @Override
+            public void onSuccess(DataSnapshot data, String message) {
+                if(data.child("Patients").hasChild(username)){
+                    onRegistrationListener.onFailed("Username Already Exists. Please Try Again!");
+                    progressDialog.dismiss();
+                    return;
+                }
+                firebaseManagement.store_user_infor(onRegistrationListener, username, password, sex, height, weight, dob);
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailed(DatabaseError e) {
+                progressDialog.dismiss();
+            }
+        });
 //        check_exist(activity, username, password, sex, height, weight, dob);
     }
 
