@@ -21,6 +21,16 @@ public class Patient {
         this.weight= weight;
     }
 
+    public Patient(String dob, long height, String password, long sex, String username, long weight, String fcm) {
+        this.dob = dob;
+        this.height = height;
+        this.password = password;
+        this.sex = sex;
+        this.username = username;
+        this.weight = weight;
+        this.fcm = fcm;
+    }
+
     public String getFcm() {return fcm;}
 
     public void setFcm(String fcm){ this.fcm = fcm;}

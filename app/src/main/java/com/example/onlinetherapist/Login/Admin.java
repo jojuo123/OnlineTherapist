@@ -9,6 +9,12 @@ public class Admin {
 
     }
 
+    public Admin(String username, String password, String fcm) {
+        this.username = username;
+        this.password = password;
+        this.fcm = fcm;
+    }
+
     public Admin(String password, String username) {
         this.username = username;
         this.password = password;

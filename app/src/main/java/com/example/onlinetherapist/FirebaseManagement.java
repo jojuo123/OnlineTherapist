@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import com.example.onlinetherapist.Login.Admin;
 import com.example.onlinetherapist.Login.Patient;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
+import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 import com.example.onlinetherapist.homescreen.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -109,8 +110,8 @@ public class FirebaseManagement {
 
     public void doSignIn(final Activity activity, final String username, final String password) {
 
-        final String Loginstate="Login";
-        Query query= FirebaseDatabase.getInstance().getReference("Patients")
+        //final String Loginstate="Login";
+        Query query= FirebaseDatabase.getInstance().getReference(Constant.PATIENT_TABLE)
                 .orderByChild("username")
                 .equalTo(username);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -141,7 +142,7 @@ public class FirebaseManagement {
     }
 
     public void doSignInAdmin(final Activity activity, final String username, final String password) {
-        Query query= FirebaseDatabase.getInstance().getReference("Therapists")
+        Query query= FirebaseDatabase.getInstance().getReference(Constant.THERAPIST_TABLE)
                 .orderByChild("username")
                 .equalTo(username);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -153,8 +154,8 @@ public class FirebaseManagement {
                         assert p != null;
                         if (p.getPassword().equals(password)) {
                             Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(activity, MainActivity.class);
-                            activity.startActivity(intent);
+                            SendFCMTokenTherapist(activity, p.getUsername());
+                            //break;
                         }
                     }
                 }
@@ -269,12 +270,33 @@ public class FirebaseManagement {
         });
     }
 
-    public void SendFCMTokenTherapist(String uname, String token)
+    public void SendFCMTokenTherapist(final Activity activity, final String uname)
+    {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful())
+            {
+                Log.e("FCM", "fail to fetch fcm");
+                return;
+            }
+            String token = task.getResult();
+            SendFCMTokenPatient(activity, uname, token);
+        });
+    }
+
+    public void SendFCMTokenTherapist(final Activity activity, String uname, String token)
     {
         DatabaseReference databaseReference;
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        databaseReference.child(Constant.THERAPIST_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(token);
+        databaseReference.child(Constant.THERAPIST_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+//                Intent intent = new Intent(activity.getApplicationContext(), HomeActivity.class);
+//                intent.putExtra("fcm_token", token);
+//                activity.startActivity(intent);
+//                activity.finish();
+            }
+        });
     }
 
     public interface ILogoutFB
@@ -360,6 +382,34 @@ public class FirebaseManagement {
                 editor.apply();
                 activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
                 activity.finish();
+            }
+        });
+    }
+
+    public void ViewAppointmentPatient(final Activity activity)
+    {
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(Constant.THERAPIST_TABLE).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren())
+                {
+                    if (ds.exists())
+                    {
+                        Admin ad = ds.getValue(Admin.class);
+                        Intent intent = new Intent(activity.getApplicationContext(), ViewAppointmentActivity.class);
+                        intent.putExtra("therapistname", ad.getUsername());
+                        intent.putExtra("therapistfcm", ad.getFcm());
+                        activity.startActivity(intent);
+                        //break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

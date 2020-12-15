@@ -10,7 +10,9 @@ public class Constant {
     public static final String TODOLISTITEM_TABLE = "Todolist_item";
     public static final String NOTE_TABLE = "Note";
 
-    public static final String FCM_TOKEN = "fcm_token";
+    public static final String THERAPIST_UNAME = "therapist1";
+
+    public static final String FCM_TOKEN = "fcm";
     public static final String THERAPIST_TABLE = "Therapists";
 
 
