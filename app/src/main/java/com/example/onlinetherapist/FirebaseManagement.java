@@ -279,7 +279,7 @@ public class FirebaseManagement {
                 return;
             }
             String token = task.getResult();
-            SendFCMTokenPatient(activity, uname, token);
+            SendFCMTokenTherapist(activity, uname, token);
         });
     }
 

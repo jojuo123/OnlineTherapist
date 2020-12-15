@@ -25,6 +25,7 @@ public class MessagingService extends FirebaseMessagingService {
         {
             if (type.equalsIgnoreCase(Constant.REMOTE_MSG_INVITATION))
             {
+                Log.e("invite", "fofo");
                 Intent intent = new Intent(getApplicationContext(), IncomingActivity.class);
                 intent.putExtra(Constant.REMOTE_MSG_MEETING_TYPE, remoteMessage.getData().get(Constant.REMOTE_MSG_MEETING_TYPE));
                 intent.putExtra(Constant.ANY_USERNAME, remoteMessage.getData().get(Constant.ANY_USERNAME));

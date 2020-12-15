@@ -11,7 +11,7 @@ public class VideoCallPresenter implements IVideoCallPresenter{
     public void VideoCallToTherapist(Activity activity, String adminUName, String adminToken) {
         Intent intent = new Intent(activity.getApplicationContext(), OutgoingActivity.class);
         intent.putExtra("inviteeUName", adminUName);
-        intent.putExtra("inviter_token", adminToken);
+        intent.putExtra("invitee_token", adminToken);
         intent.putExtra("type", "video");
         activity.startActivity(intent);
     }
@@ -20,7 +20,7 @@ public class VideoCallPresenter implements IVideoCallPresenter{
     public void AudioCallToTherapist(Activity activity, String adminUName, String adminToken) {
         Intent intent = new Intent(activity.getApplicationContext(), OutgoingActivity.class);
         intent.putExtra("inviteeUName", adminUName);
-        intent.putExtra("inviter_token", adminToken);
+        intent.putExtra("invitee_token", adminToken);
         intent.putExtra("type", "audio");
         activity.startActivity(intent);
     }
@@ -29,7 +29,7 @@ public class VideoCallPresenter implements IVideoCallPresenter{
     public void VideoCallToPatient(Activity activity, String patientUName, String patientToken) {
         Intent intent = new Intent(activity.getApplicationContext(), OutgoingActivity.class);
         intent.putExtra("inviteeUName", patientUName);
-        intent.putExtra("inviter_token", patientToken);
+        intent.putExtra("invitee_token", patientToken);
         intent.putExtra("type", "video");
         activity.startActivity(intent);
     }
@@ -38,7 +38,7 @@ public class VideoCallPresenter implements IVideoCallPresenter{
     public void AudioCallToPatient(Activity activity, String patientUName, String patientToken) {
         Intent intent = new Intent(activity.getApplicationContext(), OutgoingActivity.class);
         intent.putExtra("inviteeUName", patientUName);
-        intent.putExtra("inviter_token", patientToken);
+        intent.putExtra("invitee_token", patientToken);
         intent.putExtra("type", "audio");
         activity.startActivity(intent);
     }

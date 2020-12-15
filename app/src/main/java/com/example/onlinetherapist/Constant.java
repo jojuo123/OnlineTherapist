@@ -32,9 +32,11 @@ public class Constant {
         HashMap<String, String> headers = new HashMap<>();
         headers.put(
           Constant.REMOTE_MSG_AUTHORIZATION,
-          "AAAAj2tdjQk:APA91bGzMHxXR3kAW7Gqqq39qavg_qRVu679TYa5dHbncrhrX90ImE5t1J8WMP_r_Ulnq-hikGsIMDZ1Y7WdbbkTNgF2np_yQc8jwNRwC8MvHfuoXGVtbkqX5TDsgSGc1Xg0mv8H9-rH"
+          "AAAAj2tdjQk:APA91bHzkeZY94wfxv7Z-q597fglwrwN2oYRAbe4CKVl0tKewU9U8ajHm3EyJD91zM7A6pnhEPWkd0J_WTbRdv6tk7TrOyaAZiIOcN3-A_SZ0ukWKHudTcyUl6Me28SCcvUjSG9kRK1h"
         );
         headers.put(Constant.REMOTE_MSG_CONTENT_TYPE, "application/json");
         return headers;
     }
+
+    //public static String FCM_TOKEN_VALUE = null;
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.onlinetherapist.Constant;
@@ -22,17 +23,40 @@ import retrofit2.Response;
 public class OutgoingActivity extends AppCompatActivity {
 
     private String inviterToken = null;
+    private String meetingType = null;
+    private String inviteeUName = null;
+    private String inviteeToken = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outgoing);
 
-        getFCM();
+        InitVariable();
+//        Log.e("type", meetingType);
+//        Log.e("token", inviteeToken);
+//        Log.e("token", inviterToken);
+//        Log.e("uname", inviteeUName);
+        initiateMeeting(meetingType, inviteeToken);
+//        intent.putExtra("inviteeUName", adminUName);
+//        intent.putExtra("invitee_token", adminToken);
+//        intent.putExtra("type", "audio");
+//        activity.startActivity(intent);
     }
 
-    private void getFCM()
+    private void InitVariable()
     {
-        inviterToken = getIntent().getStringExtra("inviter_token");
+        meetingType = getIntent().getStringExtra("type");
+        inviteeToken = getIntent().getStringExtra("invitee_token");
+        inviteeUName = getIntent().getStringExtra("inviteeUName");
+        inviterToken = GetToken();
+    }
+
+    private String GetToken()
+    {
+        String token;
+        SharedPreferences sharedPreferences = getSharedPreferences("SavedFCMToken", MODE_PRIVATE);
+        token = sharedPreferences.getString("fcm_token_value", "");
+        return token;
     }
 
     public String SavedCurrentUsername(){
@@ -61,6 +85,8 @@ public class OutgoingActivity extends AppCompatActivity {
             body.put(Constant.REMOTE_MSG_DATA, data);
             body.put(Constant.REMOTE_MSG_REGISTRATION_IDS, tokens);
 
+            Log.e("json", body.toString());
+
             sendRemoteMessage(body.toString(), Constant.REMOTE_MSG_INVITATION);
         } catch (Exception exception)
         {
@@ -76,12 +102,17 @@ public class OutgoingActivity extends AppCompatActivity {
         ).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull  Call<String> call, @NonNull Response<String> response) {
-                if(type.equalsIgnoreCase(Constant.REMOTE_MSG_TYPE))
+                if(response.isSuccessful())
                 {
+                    Log.e("success call", "success");
+                    if (type.equalsIgnoreCase(Constant.REMOTE_MSG_INVITATION))
+                    {
 
+                    }
                 }
                 else
                 {
+                    Log.e("response type wrong", response.message());
                     Toast.makeText(OutgoingActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -89,6 +120,7 @@ public class OutgoingActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                Log.e("api fail", t.getMessage());
                 Toast.makeText(OutgoingActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 finish();
             }
