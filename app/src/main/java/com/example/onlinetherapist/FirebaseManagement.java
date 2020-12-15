@@ -123,8 +123,9 @@ public class FirebaseManagement {
                         if (p.getPassword().equals(password)) {
                             Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(activity, HomeActivity.class);
-                            activity.startActivity(intent);
+//                            Intent intent = new Intent(activity, HomeActivity.class);
+//                            activity.startActivity(intent);
+                            SendFCMTokenPatient(activity, p.getUsername());
                         }
                     }
                 }
@@ -236,6 +237,46 @@ public class FirebaseManagement {
         databaseReference.child(Constant.PATIENT_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(token);
     }
 
+    public void SendFCMTokenPatient(final Activity activity, final String uname)
+    {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful())
+                {
+                    Log.e("FCM", "fail to fetch fcm");
+                    return;
+                }
+                String token = task.getResult();
+                SendFCMTokenPatient(activity, uname, token);
+            }
+        });
+    }
+
+    public void SendFCMTokenPatient(final Activity activity, String uname, String token)
+    {
+        DatabaseReference databaseReference;
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.child(Constant.PATIENT_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent intent = new Intent(activity.getApplicationContext(), HomeActivity.class);
+                intent.putExtra("fcm_token", token);
+                activity.startActivity(intent);
+                activity.finish();
+            }
+        });
+    }
+
+    public void SendFCMTokenTherapist(String uname, String token)
+    {
+        DatabaseReference databaseReference;
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.child(Constant.THERAPIST_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(token);
+    }
+
     public interface ILogoutFB
     {
         void onSuccess();
@@ -244,7 +285,7 @@ public class FirebaseManagement {
 
     public class LogoutClass
     {
-        public void PatientLogout(String uname, final FirebaseManagement.ILogoutFB listener)
+        public void PatientLogout(final Activity activity, String uname, final FirebaseManagement.ILogoutFB listener)
         {
             DatabaseReference databaseReference;
             Log.e("name", uname);
@@ -259,6 +300,18 @@ public class FirebaseManagement {
                 public void onFailure(@NonNull Exception e) {
                     listener.onFailure();
                 }
+            }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Log.d("success", "LO suc");
+                    SharedPreferences preferences = activity.getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.putString("remember","false");
+                    editor.putString("remember and login","false");
+                    editor.apply();
+                    activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
+                    activity.finish();
+                }
             });
         }
     }
@@ -266,18 +319,18 @@ public class FirebaseManagement {
     public boolean PatientLogout(final Activity activity, String uname) {
         LoggedOut = false;
         FlagLoggout = false;
-        new LogoutClass().PatientLogout(uname, new ILogoutFB() {
+        new LogoutClass().PatientLogout(activity, uname, new ILogoutFB() {
             @Override
             public void onSuccess() {
                 LoggedOut = true;
-                Log.d("success", "LO suc");
-                SharedPreferences preferences = activity.getSharedPreferences("checkbox", MODE_PRIVATE);
-                SharedPreferences.Editor editor=preferences.edit();
-                editor.putString("remember","false");
-                editor.putString("remember and login","false");
-                editor.apply();
-                activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
-                activity.finish();
+//                Log.d("success", "LO suc");
+//                SharedPreferences preferences = activity.getSharedPreferences("checkbox", MODE_PRIVATE);
+//                SharedPreferences.Editor editor=preferences.edit();
+//                editor.putString("remember","false");
+//                editor.putString("remember and login","false");
+//                editor.apply();
+//                activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
+//                activity.finish();
             }
 
             @Override
@@ -289,5 +342,25 @@ public class FirebaseManagement {
         });
         Log.d("return", String.valueOf(LoggedOut));
         return LoggedOut;
+    }
+
+    public void TherapistLogout(final Activity activity, String uname)
+    {
+        DatabaseReference databaseReference;
+        Log.e("name", uname);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(Constant.THERAPIST_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(null).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                //Log.d("success", "LO suc");
+                SharedPreferences preferences = activity.getSharedPreferences("checkbox", MODE_PRIVATE);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString("remember","false");
+                editor.putString("remember and login","false");
+                editor.apply();
+                activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
+                activity.finish();
+            }
+        });
     }
 }

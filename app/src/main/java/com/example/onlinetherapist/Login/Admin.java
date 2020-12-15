@@ -3,6 +3,7 @@ package com.example.onlinetherapist.Login;
 public class Admin {
     private String username;
     private String password;
+    private String fcm;
 
     public Admin(){
 
@@ -12,6 +13,10 @@ public class Admin {
         this.username = username;
         this.password = password;
     }
+
+    public String getFcm() {return fcm;}
+
+    public void setFcm(String fcm){ this.fcm = fcm;}
 
     public String getPassword() {
         return password;

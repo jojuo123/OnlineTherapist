@@ -7,6 +7,7 @@ public class Patient {
     private long sex;
     private String username;
     private long weight;
+    private String fcm;
 
     public Patient(){
 
@@ -19,6 +20,10 @@ public class Patient {
         this.username = username;
         this.weight= weight;
     }
+
+    public String getFcm() {return fcm;}
+
+    public void setFcm(String fcm){ this.fcm = fcm;}
 
     public String getDob() {
         return dob;

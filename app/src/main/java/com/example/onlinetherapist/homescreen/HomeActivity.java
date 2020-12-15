@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         }
 
         InitVariable();
-        SendFCMTokenToDatabase();
+        //SendFCMTokenToDatabase();
         //Logout();
     }
 
