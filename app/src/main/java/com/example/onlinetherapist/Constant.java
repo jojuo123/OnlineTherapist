@@ -9,5 +9,6 @@ public class Constant {
 
     public static String FCM_TOKEN = "fcm_token";
 
+    public static String USER_ID = "helloworld";
     //public static String FCM_TOKEN_STRING = "";
 }
