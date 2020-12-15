@@ -16,6 +16,7 @@ public class Constant {
     public static final String THERAPIST_TABLE = "Therapists";
 
 
+
     public static final String REMOTE_MSG_AUTHORIZATION = "Authorization";
     public static final String REMOTE_MSG_CONTENT_TYPE = "Content-Type";
     //public static String FCM_TOKEN_STRING = "";

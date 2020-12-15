@@ -7,10 +7,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.example.onlinetherapist.R;
+import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 
 public class HomeActivity extends AppCompatActivity implements IHomeView {
 
@@ -22,7 +25,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         username=SavedCurrentUsername();
-
+        homePresenter = new HomePresenter(this);
         SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
         String checkbox= preferences.getString("remember","");
         if(checkbox.equals("true")){
@@ -37,9 +40,25 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         }
 
         InitVariable();
+        onViewAppointmentClicked();
+
         //Logout();
         //testing: delete when release
         FirebaseManagement.getInstance().ViewAppointmentPatient(this);
+    }
+
+    private void onViewAppointmentClicked() {
+        SharedPreferences savedUsername = getSharedPreferences("SavedUsername", MODE_PRIVATE);
+        final String uname = savedUsername.getString("username", "");
+
+        Button viewApp = findViewById(R.id.patient_view_app);
+        viewApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homePresenter.onClickAppointment(HomeActivity.this,
+                        ViewAppointmentActivity.class, uname, "");
+            }
+        });
     }
 
     private void InitVariable() {
@@ -79,5 +98,15 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
 
     public void Logout(View view) {
         Logout();
+    }
+
+    @Override
+    public void onFailed(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

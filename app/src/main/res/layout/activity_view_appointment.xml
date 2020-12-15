@@ -1,14 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".appointment.ViewAppointmentActivity"
-    android:orientation="horizontal">
-    <Button android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:id="@+id/btnVidCallTherapist" android:text="videocall"/>
-    <Button android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:id="@+id/btnAudioCallTherapist" android:text="audiocall"/>
+    tools:context=".appointment.ViewAppointmentActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="ScrollViewSize">
+        <TextView
+            android:layout_marginTop="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Appointment"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textStyle="bold"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:textSize="25sp"
+                android:text="Upcoming Appointment"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                />
+            <ImageButton
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancel_appointment"
+                android:src="@drawable/close"
+                android:layout_gravity="end"
+                />
+        </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date "
+                android:textSize="20sp"
+                android:layout_marginEnd="20dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_marginStart="20dp"
+                android:id="@+id/time_appointment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Time Appointment"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time "
+                android:textSize="20sp"
+                android:layout_marginEnd="20dp"
+                />
+            <TextView
+                android:layout_marginStart="20dp"
+                android:id="@+id/date_appointment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Time Appointment"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/videocamera32"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/colorAccent"
+            />
+
+        <Button
+
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Notes"
+            android:id="@+id/patient_view_notes"
+            />
+        <Button
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Advices"
+            android:id="@+id/patients_view_advices"/>
+
+    </LinearLayout>
+</ScrollView>

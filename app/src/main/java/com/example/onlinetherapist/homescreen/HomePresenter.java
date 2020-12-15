@@ -1,6 +1,9 @@
 package com.example.onlinetherapist.homescreen;
 
 import android.app.Activity;
+import android.content.Intent;
+
+import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 
 public class HomePresenter implements IHomePresenter {
 
@@ -42,4 +45,23 @@ public class HomePresenter implements IHomePresenter {
     public boolean Logout(Activity activity, String uname) {
         return homeInteractor.Logout(activity, uname);
     }
+
+    @Override
+    public void onClickAppointment(Activity current, Class<ViewAppointmentActivity> viewApp, String username, String fcm) {
+        Intent intent = new Intent(current, viewApp);
+        intent.putExtra("therapistname", username);
+        intent.putExtra("therapistfcm", fcm);
+        current.startActivity(intent);
+    }
+
+    @Override
+    public void onClickNotes(Activity current, Activity viewNotes) {
+
+    }
+
+    @Override
+    public void onClickAdivces(Activity current, Activity viewAdvices) {
+
+    }
+
 }

@@ -14,6 +14,9 @@ import com.example.onlinetherapist.Login.Admin;
 import com.example.onlinetherapist.Login.Patient;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
+import com.example.onlinetherapist.account.IRegisterPresenter;
+import com.example.onlinetherapist.appointment.IViewAppointmentPresenter;
+import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.homescreen.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,8 +30,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.SimpleFormatter;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -37,6 +44,8 @@ public class FirebaseManagement {
     private ProgressDialog progressDialog;
     boolean LoggedOut = false;
     boolean FlagLoggout;
+
+
 
 
     private static class SingletonHolder{
@@ -52,36 +61,129 @@ public class FirebaseManagement {
     public DatabaseReference getDatabaseReference(){
         return databaseReference;
     }
-    public void check_username(final Activity activity, final String username, final String password,
-                               final int sex, final int height, final int weight, final String dob){
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
+    public void getUsernameData(final onReadDataListener onReadDataListener){
+        onReadDataListener.onStart();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child("Patients").hasChild(username)){
-                    Toast.makeText(activity,"Username Already Exists. Please Try Again!",
-                            Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    return;
-                }
-                store_user_infor(activity, username, password, sex, height, weight, dob);
-
+                onReadDataListener.onSuccess(snapshot.child(Constant.PATIENT_TABLE), "Success");
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                onReadDataListener.onFailed(error);
             }
         });
 
+    }
+//    public void check_username(final Activity activity, final String username, final String password,
+//                               final int sex, final int height, final int weight, final String dob){
+//
+////        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//        progressDialog = new ProgressDialog(activity);
+//        progressDialog.setMessage("Please wait...");
+//        progressDialog.show();
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.child("Patients").hasChild(username)){
+//                    Toast.makeText(activity,"Username Already Exists. Please Try Again!",
+//                            Toast.LENGTH_SHORT).show();
+//                    progressDialog.dismiss();
+//                    return;
+//                }
+//                store_user_infor(activity, username, password, sex, height, weight, dob);
+//
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//
+//    }
+    public void getBookAppointments(final String userID, final onReadDataListener listener){
+        listener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot appointmentInformation = null;
+                snapshot = snapshot.child(Constant.APPOINTMENT_TABLE);
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String userIdDB = "";
+                    userIdDB = traverse.child("User_ID").getValue().toString();
+                    long status = (long)traverse.child("Status").getValue();
+                    if(userIdDB.equals(userID) && status == 0){
+                        appointmentInformation = traverse;
+                        break;
+                    }
+                }
+
+
+                listener.onSuccess(appointmentInformation, "Success");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailed(error);
+            }
+        });
 
     }
-    public void store_user_infor(Activity activity, String username, String password, int sex, int height, int weight, String dob) {
-        DatabaseReference databaseReference;
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+    public void removeAppointment(final Date currentDate, final String userID, final onReadDataListener onReadDataListener) {
+        onReadDataListener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot = snapshot.child(Constant.APPOINTMENT_TABLE);
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String userIdDB = "";
+                    userIdDB = traverse.child("User_ID").getValue().toString();
+                    if(userIdDB.equals(userID)){
+                        final DataSnapshot finalSnapshot = traverse;
+                        //calculate different time in order to allow cancellation
+                        String bookedDate = traverse.child("Date").getValue().toString();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date bookDate = null;
+                        try{
+                            bookDate = simpleDateFormat.parse(bookedDate);
+                        }
+                        catch (ParseException e){
+                            e.printStackTrace();
+                        }
+                        long diff = currentDate.getTime() - bookDate.getTime();
+                        if(diff/(1000*60*60) <= 48){
+                            onReadDataListener.onSuccess(finalSnapshot,
+                                    "Failed");
+                            return;
+                        }
+
+                        databaseReference.child(Constant.APPOINTMENT_TABLE).child(traverse.getKey().toString())
+                                .child("Status").setValue(2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                onReadDataListener.onSuccess(finalSnapshot, "Success Remove");
+                            }
+                        });
+
+
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                onReadDataListener.onFailed(error);
+            }
+        });
+    }
+    public void store_user_infor(final IRegisterPresenter.onRegistrationListener onRegistrationListener,
+                                 String username, String password, int sex, int height, int weight, String dob) {
+//        DatabaseReference databaseReference;
+//        databaseReference = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> user_infor = new HashMap<>();
         user_infor.put("username", username);
         user_infor.put("password", password);
@@ -94,16 +196,16 @@ public class FirebaseManagement {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-//                        onRegistrationListener.onSuccess("Success Create Account");
-                        progressDialog.dismiss();
+                        onRegistrationListener.onSuccess("Success Create Account");
+//                        progressDialog.dismiss();
 
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-//                        onRegistrationListener.onFailed("Failed Create Account. Please Check Internet Connection");
-                        progressDialog.dismiss();
+                        onRegistrationListener.onFailed("Failed Create Account. Please Check Internet Connection");
+//                        progressDialog.dismiss();
                     }
                 });
     }

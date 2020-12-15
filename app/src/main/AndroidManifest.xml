@@ -16,11 +16,19 @@
         tools:targetApi="m">
         <activity android:name=".videocall.OutgoingActivity"></activity>
         <activity android:name=".videocall.IncomingActivity" />
+        <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity"></activity>
+        <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
         <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity" />
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />
         <activity android:name=".homescreen.HomeActivity" />
         <activity android:name=".videocall.VideoCallActivity" />
-        <activity android:name=".appointment.ViewAppointmentActivity" />
+        <activity android:name=".appointment.ViewAppointmentActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity android:name=".appointment.BookAppointmentActivity" />
         <activity
             android:name=".Login.UI.LoginActivity"
