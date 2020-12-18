@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.example.onlinetherapist.R;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
@@ -43,6 +44,8 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         onViewAppointmentClicked();
         onBookAppointmentClicked();
         //Logout();
+        //testing: delete when release
+        FirebaseManagement.getInstance().ViewAppointmentPatient(this);
     }
 
     private void onBookAppointmentClicked() {
@@ -71,6 +74,11 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
 
     private void InitVariable() {
         homePresenter = new HomePresenter(this);
+
+        SharedPreferences preferences = getSharedPreferences("SavedFCMToken", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("fcm_token_value",getIntent().getStringExtra("fcm_token"));
+        editor.apply();
     }
 
     private void SendFCMTokenToDatabase() {
