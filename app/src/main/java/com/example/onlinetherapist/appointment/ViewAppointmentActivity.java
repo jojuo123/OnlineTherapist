@@ -32,7 +32,7 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
     public void displayAppointment(){
         timeAppointment = findViewById(R.id.time_appointment);
         dateAppointment = findViewById(R.id.date_appointment);
-        statusAppointment = findViewById(R.id.status_appointment);
+        //statusAppointment = findViewById(R.id.status_appointment);
 
         presenter.retrieveAppointment(this, timeAppointment, dateAppointment);
 

@@ -64,4 +64,9 @@ public class HomePresenter implements IHomePresenter {
 
     }
 
+    @Override
+    public void onClickBookAppointment(Activity current, Activity bookAppointment) {
+
+    }
+
 }

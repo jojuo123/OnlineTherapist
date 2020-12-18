@@ -15,4 +15,5 @@ public interface IHomePresenter {
     void onClickAppointment(Activity current, Class<ViewAppointmentActivity> viewApp, String username, String fcm);
     void onClickNotes(Activity current, Activity viewNotes);
     void onClickAdivces(Activity current, Activity viewAdvices);
+    void onClickBookAppointment(Activity current, Activity bookAppointment);
 }

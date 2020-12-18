@@ -41,7 +41,18 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         InitVariable();
         SendFCMTokenToDatabase();
         onViewAppointmentClicked();
+        onBookAppointmentClicked();
         //Logout();
+    }
+
+    private void onBookAppointmentClicked() {
+        Button bookApp = findViewById(R.id.patient_book_app);
+        bookApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homePresenter.onClickBookAppointment(HomeActivity.this, null);
+            }
+        });
     }
 
     private void onViewAppointmentClicked() {
