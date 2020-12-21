@@ -28,7 +28,7 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
     }
 
     private void onLogoutClicked() {
-        final Button logout = findViewById(R.id.logout);
+        final Button logout = findViewById(R.id.therapist_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

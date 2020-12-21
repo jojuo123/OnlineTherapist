@@ -21,8 +21,8 @@ public class TherapistHomePresenter implements ITherapistHomePresenter {
     }
 
     @Override
-    public boolean Logout(Activity activity, String uname) {
-        return interactor.Logout(activity, uname);
+    public void Logout(Activity activity, String uname) {
+        interactor.Logout(activity, uname);
     }
 
     @Override

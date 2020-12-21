@@ -18,7 +18,7 @@ public class TherapistHomeInteractor implements ITherapistHomeInteractor{
     }
 
     @Override
-    public boolean Logout(Activity activity, String uname) {
-        return firebaseManagement.PatientLogout(activity, uname);
+    public void Logout(Activity activity, String uname) {
+        firebaseManagement.TherapistLogout(activity, uname);
     }
 }

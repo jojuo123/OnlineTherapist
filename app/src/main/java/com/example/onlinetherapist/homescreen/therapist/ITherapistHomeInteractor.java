@@ -5,5 +5,5 @@ import android.app.Activity;
 public interface ITherapistHomeInteractor {
     void SendFCMToken(String uname);
 
-    boolean Logout(Activity activity, String uname);
+    void Logout(Activity activity, String uname);
 }
