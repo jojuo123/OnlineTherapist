@@ -46,6 +46,6 @@ public class BookAppointmentActivity extends AppCompatActivity implements IBookA
 
     @Override
     public void bookAppointment(String date, int slot) {
-
+        
     }
 }

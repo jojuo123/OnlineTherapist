@@ -44,6 +44,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:textSize="25sp"
+                android:id="@+id/txtInviterName"
                 android:text="@string/therapist"/>
         </LinearLayout>
 
@@ -63,6 +64,7 @@
                 android:background="@drawable/background_deny_icon"
                 android:src="@drawable/ic_deny"
                 android:layout_alignParentStart="true"
+                android:onClick="RejectCall"
                 app:tint="@color/colorWhite" />
             <ImageButton
                 android:id="@+id/accept_call"
@@ -73,6 +75,7 @@
                 android:src="@drawable/ic_call"
                 app:tint="@color/colorWhite"
                 android:layout_alignParentEnd="true"
+                android:onClick="AcceptCall"
                 app:layout_constraintStart_toEndOf="parent" />
         </RelativeLayout>
     </LinearLayout>

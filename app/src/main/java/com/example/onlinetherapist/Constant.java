@@ -28,6 +28,13 @@ public class Constant {
     public static final String REMOTE_MSG_DATA = "data";
     public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";
 
+    public static final String REMOTE_MSG_INVITATION_RESPONSE = "invitationResponse";
+    public static final String REMOTE_MSG_INVITATION_ACCEPTED = "accepted";
+    public static final String REMOTE_MSG_INVITATION_REJECTED = "rejected";
+    public static final String REMOTE_MSG_INVITATION_CANCEL = "cancelled";
+
+    public static final String REMOTE_MSG_MEETING_ROOM = "meetingRoom";
+
     public static HashMap<String, String> getRemoteMessageHeader()
     {
         HashMap<String, String> headers = new HashMap<>();

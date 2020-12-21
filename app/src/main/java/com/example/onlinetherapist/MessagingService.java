@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.onlinetherapist.videocall.IncomingActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -29,8 +30,18 @@ public class MessagingService extends FirebaseMessagingService {
                 Intent intent = new Intent(getApplicationContext(), IncomingActivity.class);
                 intent.putExtra(Constant.REMOTE_MSG_MEETING_TYPE, remoteMessage.getData().get(Constant.REMOTE_MSG_MEETING_TYPE));
                 intent.putExtra(Constant.ANY_USERNAME, remoteMessage.getData().get(Constant.ANY_USERNAME));
+                intent.putExtra(Constant.REMOTE_MSG_INVITER_TOKEN, remoteMessage.getData().get(Constant.REMOTE_MSG_INVITER_TOKEN));
+                intent.putExtra(Constant.REMOTE_MSG_MEETING_ROOM, remoteMessage.getData().get(Constant.REMOTE_MSG_MEETING_ROOM));
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+
+            else if (type.equalsIgnoreCase(Constant.REMOTE_MSG_INVITATION_RESPONSE))
+            {
+                Intent intent = new Intent(Constant.REMOTE_MSG_INVITATION_RESPONSE);
+                intent.putExtra(Constant.REMOTE_MSG_INVITATION_RESPONSE,remoteMessage.getData().get(Constant.REMOTE_MSG_INVITATION_RESPONSE));
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
             }
         }
     }

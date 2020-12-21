@@ -19,6 +19,11 @@ public class HomeInteractor implements IHomeInteractor{
     }
 
     @Override
+    public void ViewAppointmentPatient(Activity activity) {
+        firebaseManagement.ViewAppointmentPatient(activity);
+    }
+
+    @Override
     public boolean Logout(Activity activity, String uname) {
         return firebaseManagement.PatientLogout(activity, uname);
     }
