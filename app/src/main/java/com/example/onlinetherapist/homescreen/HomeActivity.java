@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.example.onlinetherapist.R;
+import com.example.onlinetherapist.appointment.BookAppointmentActivity;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 
 public class HomeActivity extends AppCompatActivity implements IHomeView {
@@ -45,7 +46,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         onBookAppointmentClicked();
         //Logout();
         //testing: delete when release
-        FirebaseManagement.getInstance().ViewAppointmentPatient(this);
+
     }
 
     private void onBookAppointmentClicked() {
@@ -53,7 +54,8 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         bookApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homePresenter.onClickBookAppointment(HomeActivity.this, null);
+                homePresenter.onClickBookAppointment(HomeActivity.this,
+                        BookAppointmentActivity.class);
             }
         });
     }
