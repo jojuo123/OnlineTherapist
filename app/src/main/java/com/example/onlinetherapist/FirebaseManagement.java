@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.sip.SipSession;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -30,13 +31,16 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.SimpleFormatter;
 
+import com.example.onlinetherapist.appointment.TimeSlotModel;
 import static android.content.Context.MODE_PRIVATE;
 
 public class FirebaseManagement {
@@ -103,6 +107,74 @@ public class FirebaseManagement {
 //
 //
 //    }
+    public void getPatientInfo(final onReadDataListener listener,String uname)
+    {
+        listener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                snapshot = snapshot.child(Constant.PATIENT_TABLE);
+                Patient patient = null;
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    if(traverse.child("username").getValue().toString().equals(uname)) {
+                        String dob;
+                        long height;
+                        String password;
+                        long sex;
+                        String username;
+                        long weight;
+                        String fcm;
+
+                        dob = traverse.child("dob").getValue().toString();
+                        height = (long) traverse.child("height").getValue();
+                        password = (String) traverse.child("password").getValue();
+                        sex = (long) traverse.child("sex").getValue();
+                        username = traverse.child("username").getValue().toString();
+                        weight = (long) traverse.child("weight").getValue();
+                        fcm = (String) traverse.child("fcm").getValue();
+                        patient = new Patient(dob, height, password, sex, username, weight, fcm);
+                        break;
+                    }
+                }
+                listener.onSuccessGetPatientInfo(patient);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    public void getTimeSlot(final onReadDataListener listener)
+    {
+        listener.onStart();
+        ArrayList<TimeSlotModel> timeSlotModelArray =  new ArrayList<TimeSlotModel>();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                snapshot = snapshot.child(Constant.APPOINTMENT_TABLE);
+
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String userId = "";
+                    long slot = 0;
+                    long status = 0;
+                    String date;
+
+                    userId = traverse.child("User_ID").getValue().toString();
+                    slot = (long) traverse.child("Slot").getValue();
+                    status = (long)traverse.child("Status").getValue();
+                    date = traverse.child("Date").getValue().toString();
+                    timeSlotModelArray.add(new TimeSlotModel(date,slot,status,userId));
+                }
+                listener.onSuccessTimeSlot(timeSlotModelArray);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+    };
     public void getBookAppointments(final String userID, final onReadDataListener listener){
         listener.onStart();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -114,7 +186,7 @@ public class FirebaseManagement {
                     String userIdDB = "";
                     userIdDB = traverse.child("User_ID").getValue().toString();
                     long status = (long)traverse.child("Status").getValue();
-                    if(userIdDB.equals(userID) && status == 0){
+                    if(userIdDB.equals(userID) && status == 1){
                         appointmentInformation = traverse;
                         break;
                     }
@@ -131,7 +203,16 @@ public class FirebaseManagement {
         });
 
     }
-
+    public void addNewAppointment(TimeSlotModel timeSlotModel,final onReadDataListener listener)
+    {
+        listener.onStart();
+        databaseReference.child(Constant.APPOINTMENT_TABLE).push().setValue(timeSlotModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                listener.onSuccessAddNewAppointment();
+            }
+        });
+    }
     public void removeAppointment(final Date currentDate, final String userID, final onReadDataListener onReadDataListener) {
         onReadDataListener.onStart();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {

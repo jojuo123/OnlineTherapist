@@ -1,53 +1,55 @@
 package com.example.onlinetherapist.appointment;
 import com.example.onlinetherapist.appointment.TimeRowModel;
+import com.google.firebase.database.PropertyName;
+
 public class TimeSlotModel {
-    private String date;
-    private int slot;
-    private int status;
-    private int user_id;
+    private String Date;
+    private long Slot;
+    private long Status;
+    private String User_ID;
 
 
-    public TimeSlotModel(String date, int slot, int status, int user_id){
-        this.date = date;
-        this.slot = slot;
-        this.status =status;
+    public TimeSlotModel(String Date, long Slot, long Status, String User_ID){
+        this.Date = Date;
+        this.Slot = Slot;
+        this.Status =Status;
 
-        this.user_id = user_id;
+        this.User_ID = User_ID;
     }
 
 
-
-    public int getStatus() {
-        return status;
+    @PropertyName("Status")
+    public long getStatus() {
+        return this.Status;
     }
-
-    public void setStatus(int status) {
-        this.status = status;
+    @PropertyName("Status")
+    public void setStatus(long Status) {
+        this.Status = Status;
     }
-
-    public int getSlot() {
-        return slot;
+    @PropertyName("Slot")
+    public long getSlot() {
+        return Slot;
     }
-
-    public void setSlot(int slot) {
-        this.slot = slot;
+    @PropertyName("Slot")
+    public void setSlot(long Slot) {
+        this.Slot = Slot;
     }
-
+    @PropertyName("Date")
     public String getDate() {
-        return date;
+        return Date;
+    }
+    @PropertyName("Date")
+    public void setDate(String Date) {
+        this.Date = Date;
+    }
+    @PropertyName("User_ID")
+    public String getUser_ID() {
+        return User_ID;
+    }
+    @PropertyName("User_ID")
+    public void setUser_ID(String User_ID) {
+        this.User_ID = User_ID;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public TimeRowModel toTimeRowModel()
-    {
-        return new TimeRowModel("1/12/2020",true,true);
-    }
 
 }

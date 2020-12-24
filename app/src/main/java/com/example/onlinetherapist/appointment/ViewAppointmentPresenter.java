@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.onlinetherapist.Constant;
 import com.example.onlinetherapist.FirebaseManagement;
+import com.example.onlinetherapist.Login.Patient;
 import com.example.onlinetherapist.onReadDataListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import org.w3c.dom.Text;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -56,6 +58,21 @@ public class ViewAppointmentPresenter implements IViewAppointmentPresenter.Prese
                                     activity.finish();
                                     activity.startActivity(activity.getIntent());
                                 }
+                            }
+
+                            @Override
+                            public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
+
+                            }
+
+                            @Override
+                            public void onSuccessAddNewAppointment() {
+
+                            }
+
+                            @Override
+                            public void onSuccessGetPatientInfo(Patient patient) {
+
                             }
 
                             @Override
@@ -114,6 +131,21 @@ public class ViewAppointmentPresenter implements IViewAppointmentPresenter.Prese
                             dateAppointment.setText(status);
                         }
                         progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
+
+                    }
+
+                    @Override
+                    public void onSuccessAddNewAppointment() {
+
+                    }
+
+                    @Override
+                    public void onSuccessGetPatientInfo(Patient patient) {
+
                     }
 
                     @Override
