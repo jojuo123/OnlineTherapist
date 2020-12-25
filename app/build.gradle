@@ -32,7 +32,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'com.google.firebase:firebase-messaging:20.2.3'
-    implementation 'androidx.wear:wear:1.0.0'
     //implementation 'com.google.firebase:firebase-database:16.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -50,5 +49,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
     implementation 'com.google.android.gms:play-services-basement'
-    compileOnly 'com.google.android.wearable:wearable:2.5.0'
+
 }

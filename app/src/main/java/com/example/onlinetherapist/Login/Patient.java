@@ -1,6 +1,8 @@
 package com.example.onlinetherapist.Login;
 
-public class Patient {
+import java.io.Serializable;
+
+public class Patient implements Serializable {
     private String dob;
     private long height;
     private String password;

@@ -15,22 +15,23 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
         <activity android:name=".noteadvice.therapist.CreateATodolistItemActivity"></activity>
         <activity android:name=".noteadvice.therapist.CreateATodolistActivity" />
         <activity android:name=".noteadvice.therapist.CreateANoteActivity" />
         <activity android:name=".noteadvice.patient.ViewATodolistActivity" />
+        <activity android:name=".appointment.therapist.TherapistPatientDetailvView" />
+
+        <activity android:name=".videocall.OutgoingActivity" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
 
         <activity
             android:name=".noteadvice.patient.ViewANoteActivity"
             android:label="@string/title_activity_view_a_note" />
-        <activity android:name=".videocall.OutgoingActivity" />
+
         <activity android:name=".videocall.IncomingActivity" />
         <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity" />
         <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
@@ -67,6 +68,7 @@
         </activity>
         <activity android:name=".MainActivity" />
 
+
         <service
             android:name=".MessagingService"
             android:exported="false">
@@ -75,5 +77,10 @@
             </intent-filter>
         </service>
     </application>
+
+    <uses-feature android:name="android.hardware.type.watch" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

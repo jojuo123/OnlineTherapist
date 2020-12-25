@@ -97,6 +97,7 @@
             android:src="@drawable/videocamera32"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:id="@+id/btnVidCallTherapist"
             android:backgroundTint="@color/colorAccent"
             android:id="@+id/btnVidCallTherapist"
             />

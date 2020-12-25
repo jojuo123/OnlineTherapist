@@ -2,50 +2,62 @@ package com.example.onlinetherapist.appointment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.R;
+import java.util.ArrayList;
 
 public class BookAppointmentActivity extends AppCompatActivity implements IBookAppointmentView {
-    TimeRowModel t[] = {new TimeRowModel("21/12/2020",true,false),new TimeRowModel("22/12/2020",true,false),new TimeRowModel("23/12/202 ",true,true)};
-    BookAppointmentPresenter bookAppointmentPresenter =new BookAppointmentPresenter(this);
+
+
+    TextView textView;
+    Button button;
+    BookAppointmentPresenter bookAppointmentPresenter =new BookAppointmentPresenter(this,BookAppointmentActivity.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_appointment);
-        bookAppointmentPresenter.initTimeTable(t);
+        textView = findViewById(R.id.DateTextView);
+        button = findViewById(R.id.BookButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String temp = (String) textView.getText();
+                if ( !temp.equals("Date:"))
+                    bookAppointmentPresenter.bookAppointmentAt(BookAppointmentActivity.this, (String) textView.getText());
+                else Toast.makeText(BookAppointmentActivity.this,"Wrong time, please choose again",Toast.LENGTH_LONG).show();
+            }
+        });
+        bookAppointmentPresenter.queryTimeSlotData();
+
+
 
     }
 
     @Override
     public void initAvailableTimeTable() {
-        TableLayout timeSlot = (TableLayout)findViewById(R.id.TimeTable);
-        timeSlot.setStretchAllColumns(true);
-        timeSlot.bringToFront();
-        for(int i = 0; i < t.length; i++){
-            TableRow tr =  new TableRow(this);
-            TextView c1 = new TextView(this);
-            c1.setBackgroundColor(Color.BLUE);
-            c1.setText(String.valueOf(t[i].getDate()));
-            Button c2 = new Button(this);
-            c2.setText(String.valueOf(t[i].isMorningAvailable()));
-            Button c3 = new Button(this);
-            c3.setText(String.valueOf(t[i].isEveningAvailable()));
-            tr.addView(c1);
-            tr.addView(c2);
-            tr.addView(c3);
-            timeSlot.addView(tr);
-        }
+
+
+
+
     }
 
     @Override
-    public void bookAppointment(String date, int slot) {
+    public void bookAppointment(String date, int slot)
+    {
 
     }
+
+
 }

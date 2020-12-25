@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".appointment.therapist.TherapistPatientDetailvView">
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        ></TextView>
+
+
+    <TextView
+        android:id="@+id/dob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+
+         />
+    <TextView
+        android:id="@+id/user_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+         />
+    <TextView
+        android:id="@+id/user_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+         />
+    <TextView
+        android:id="@+id/sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+         />
+
+    <Button
+        android:id="@+id/VideoCallButton"
+        android:layout_width="205dp"
+        android:layout_height="wrap_content"
+        android:text="Call this patient"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/CancelButton"
+        android:layout_width="205dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel this appoinment"
+        android:layout_gravity="center"
+        />
+
+
+
+</LinearLayout>
+
