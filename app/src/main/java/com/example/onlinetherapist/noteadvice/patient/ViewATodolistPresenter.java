@@ -1,6 +1,8 @@
 package com.example.onlinetherapist.noteadvice.patient;
 
 import com.example.onlinetherapist.FirebaseManagement;
+import com.example.onlinetherapist.Login.Patient;
+import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.noteadvice.TodolistItemModel;
 import com.example.onlinetherapist.onReadDataListener;
 import com.example.onlinetherapist.onSetValueListener;
@@ -58,6 +60,21 @@ public class ViewATodolistPresenter implements IViewATodolistPresenter {
                 else if (message.equals("Done")){
                     view.updateTodolistItems(modelList);
                 }
+            }
+
+            @Override
+            public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
+
+            }
+
+            @Override
+            public void onSuccessAddNewAppointment() {
+
+            }
+
+            @Override
+            public void onSuccessGetPatientInfo(Patient patient) {
+
             }
 
             @Override

@@ -293,7 +293,18 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
     }
 
 
+    @Override
+    public void SendFCMToken(String uname) {
 
+    }
 
+    @Override
+    public void Logout(Activity activity, String uname) {
 
+    }
+
+    @Override
+    public void onClickAppointment(Activity current, Class<TherapistViewAppointmentActivity> viewApp, String username, String fcm) {
+
+    }
 }

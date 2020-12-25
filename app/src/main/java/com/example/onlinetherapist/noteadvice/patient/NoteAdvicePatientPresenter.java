@@ -1,6 +1,8 @@
 package com.example.onlinetherapist.noteadvice.patient;
 
 import com.example.onlinetherapist.FirebaseManagement;
+import com.example.onlinetherapist.Login.Patient;
+import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.noteadvice.NoteModel;
 import com.example.onlinetherapist.noteadvice.TodolistModel;
 import com.example.onlinetherapist.onReadDataListener;
@@ -52,6 +54,21 @@ public class NoteAdvicePatientPresenter implements INoteAdvicePatientPresenter{
             }
 
             @Override
+            public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
+
+            }
+
+            @Override
+            public void onSuccessAddNewAppointment() {
+
+            }
+
+            @Override
+            public void onSuccessGetPatientInfo(Patient patient) {
+
+            }
+
+            @Override
             public void onFailed(DatabaseError e) {
 
             }
@@ -80,6 +97,21 @@ public class NoteAdvicePatientPresenter implements INoteAdvicePatientPresenter{
                 else if (message.equals("Done")){
                     view.updateTodolistList(datalist);
                 }
+            }
+
+            @Override
+            public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
+
+            }
+
+            @Override
+            public void onSuccessAddNewAppointment() {
+
+            }
+
+            @Override
+            public void onSuccessGetPatientInfo(Patient patient) {
+
             }
 
             @Override

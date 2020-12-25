@@ -37,11 +37,7 @@
         <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
         <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />
         <activity android:name=".homescreen.HomeActivity" />
@@ -58,6 +54,11 @@
             android:name=".Login.UI.LoginActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".account.RegisterActivity">
             <intent-filter>
@@ -78,7 +79,6 @@
         </service>
     </application>
 
-    <uses-feature android:name="android.hardware.type.watch" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
