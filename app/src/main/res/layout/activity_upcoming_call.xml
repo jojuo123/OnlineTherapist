@@ -44,6 +44,7 @@
                 android:textColor="@color/colorAccent"
                 android:gravity="center"
                 android:textSize="25sp"
+                android:id="@+id/txtPatientName"
                 android:text="@string/patient"/>
         </LinearLayout>
         <LinearLayout
@@ -54,6 +55,7 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:id="@+id/btnStopInvitation"
                 android:background="@drawable/background_deny_icon"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_call_end"

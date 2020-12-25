@@ -151,7 +151,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public void navigatetoMainMenu() {
-        startActivity(new Intent(this, HomeActivity.class));
+//        String Username;
+//        SharedPreferences saved=getSharedPreferences("SavedUsername", MODE_PRIVATE);
+//        Username = saved.getString("username","");
+//        if (Username.isEmpty()) return;
+//        presenter.navigateToMainMenu(this, Username);
+        //startActivity(new Intent(this, HomeActivity.class));
     }
 
 

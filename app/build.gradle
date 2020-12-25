@@ -50,4 +50,5 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-basement'
 
+    implementation ('org.jitsi.react:jitsi-meet-sdk:2.8.2') { transitive = true }
 }

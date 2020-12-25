@@ -48,8 +48,6 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         onBookAppointmentClicked();
         //Logout();
         //testing: delete when release
-
-        //FirebaseManagement.getInstance().ViewAppointmentPatient(this);
     }
     private void onBookAppointmentClicked()
     {

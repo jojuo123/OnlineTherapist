@@ -16,6 +16,9 @@ import com.example.onlinetherapist.videocall.IVideoCallPresenter;
 import com.example.onlinetherapist.videocall.PatientListener;
 import com.example.onlinetherapist.videocall.VideoCallPresenter;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 
 public class ViewAppointmentActivity extends AppCompatActivity implements IViewAppointmentView, PatientListener {
 
@@ -37,7 +40,17 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
     }
 
     private void initButton() {
-        this.findViewById(R.id.btnVidCallTherapist).setOnClickListener(view -> initiateVideoMeetingToTherapist(therapist));
+        this.findViewById(R.id.btnVidCallTherapist).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timeAppointment = findViewById(R.id.time_appointment);
+                dateAppointment = findViewById(R.id.date_appointment);
+//                LocalDateTime now =
+//                LocalDateTime upperBound = LocalDateTime.of()
+                //can xet dieu kien ham nay
+                initiateAudioMeetingToTherapist(therapist);
+            }
+        });
 
         //this.findViewById(R.id.btnAudioCallTherapist).setOnClickListener(view -> initiateAudioMeetingToTherapist(therapist));
     }

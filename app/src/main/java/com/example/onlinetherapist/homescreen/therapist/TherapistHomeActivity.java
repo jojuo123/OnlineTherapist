@@ -8,6 +8,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.onlinetherapist.R;
+import org.jitsi.meet.*;
+import com.example.onlinetherapist.videocall.OutgoingActivity;
+
+import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import com.example.onlinetherapist.appointment.therapist.TherapistViewAppointmentActivity;
 import com.example.onlinetherapist.homescreen.HomeActivity;
 import com.example.onlinetherapist.homescreen.HomePresenter;

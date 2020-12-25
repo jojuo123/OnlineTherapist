@@ -369,7 +369,6 @@ public class FirebaseManagement {
                         if (p.getPassword().equals(password)) {
                             Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
                             SendFCMTokenTherapist(activity, p.getUsername());
-
                             //break;
                         }
                     }

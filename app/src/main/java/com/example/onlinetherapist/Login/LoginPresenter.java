@@ -17,4 +17,9 @@ public class LoginPresenter implements ILoginPresenter.Presenter {
     public void Adminauthorize(Activity activity, String username, String password) {
         interactor.doSigninAdmin(activity,username,password);
     }
+
+    @Override
+    public void navigateToMainMenu(Activity loginActivity, String username) {
+        interactor.navigateToMainMenu(loginActivity, username);
+    }
 }

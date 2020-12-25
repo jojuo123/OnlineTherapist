@@ -49,10 +49,11 @@ public class HomePresenter implements IHomePresenter {
 
     @Override
     public void onClickAppointment(Activity current, Class<ViewAppointmentActivity> viewApp, String username, String fcm) {
-        Intent intent = new Intent(current, viewApp);
-        intent.putExtra("therapistname", username);
-        intent.putExtra("therapistfcm", fcm);
-        current.startActivity(intent);
+//        Intent intent = new Intent(current, viewApp);
+//        intent.putExtra("therapistname", username);
+//        intent.putExtra("therapistfcm", fcm);
+//        current.startActivity(intent);
+        homeInteractor.ViewAppointmentPatient(current);
     }
 
     @Override
