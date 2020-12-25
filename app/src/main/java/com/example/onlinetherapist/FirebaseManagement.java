@@ -19,6 +19,7 @@ import com.example.onlinetherapist.account.IRegisterPresenter;
 import com.example.onlinetherapist.appointment.IViewAppointmentPresenter;
 import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.homescreen.HomeActivity;
+import com.example.onlinetherapist.homescreen.therapist.TherapistHomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -364,6 +365,7 @@ public class FirebaseManagement {
                         if (p.getPassword().equals(password)) {
                             Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
                             SendFCMTokenTherapist(activity, p.getUsername());
+
                             //break;
                         }
                     }
@@ -500,10 +502,10 @@ public class FirebaseManagement {
         databaseReference.child(Constant.THERAPIST_TABLE).child(uname).child(Constant.FCM_TOKEN).setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-//                Intent intent = new Intent(activity.getApplicationContext(), HomeActivity.class);
-//                intent.putExtra("fcm_token", token);
-//                activity.startActivity(intent);
-//                activity.finish();
+                Intent intent = new Intent(activity.getApplicationContext(), TherapistHomeActivity.class);
+                intent.putExtra("fcm_token", token);
+                activity.startActivity(intent);
+                activity.finish();
             }
         });
     }
