@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.onlinetherapist">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
+        <activity android:name=".noteadvice.therapist.CreateATodolistItemActivity"></activity>
+        <activity android:name=".noteadvice.therapist.CreateATodolistActivity" />
+        <activity android:name=".noteadvice.therapist.CreateANoteActivity" />
+        <activity android:name=".noteadvice.patient.ViewATodolistActivity" />
         <activity android:name=".appointment.therapist.TherapistPatientDetailvView" />
 
         <activity android:name=".videocall.OutgoingActivity" />
@@ -19,10 +27,22 @@
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
+
+        <activity
+            android:name=".noteadvice.patient.ViewANoteActivity"
+            android:label="@string/title_activity_view_a_note" />
+
         <activity android:name=".videocall.IncomingActivity" />
         <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity" />
         <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
-        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity" />
+        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />
         <activity android:name=".homescreen.HomeActivity" />
         <activity android:name=".videocall.VideoCallActivity" />
@@ -38,11 +58,6 @@
             android:name=".Login.UI.LoginActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".account.RegisterActivity">
             <intent-filter>

@@ -5,36 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".noteadvice.therapist.NoteAdviceTherapistActivity">
+    tools:context=".Login.UI.LoginActivity">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/note_advice"
+        android:text="@string/note_advice_therapist"
         android:textColor="@color/colorAccent"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/btnAddNote"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickAddNote"
-        android:text="Add new note" />
+        android:layout_marginTop="10dp"
+        android:text="@string/hint_select_patient"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/btnAddTodolist"
+    <ListView
+        android:id="@+id/listViewPatients"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickAddTodoList"
-        android:text="Add a new todolist" />
-
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickCancelBtn"
-        android:text="Cancel" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        tools:listitem="@layout/listitem_patient" />
 
 </LinearLayout>

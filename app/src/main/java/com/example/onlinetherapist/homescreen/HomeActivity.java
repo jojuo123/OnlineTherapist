@@ -129,4 +129,10 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
     public void onSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    public void onViewNoteClicked(View view) {
+        Intent intent=new Intent(this, com.example.onlinetherapist.noteadvice.patient.NoteAdvicePatientActivity.class);
+        intent.putExtra("username",username);
+        startActivity(intent);
+    }
 }
