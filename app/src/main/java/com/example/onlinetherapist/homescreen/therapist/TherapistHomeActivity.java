@@ -2,6 +2,7 @@ package com.example.onlinetherapist.homescreen.therapist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -31,18 +32,12 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
         therapistHomePresenter = new TherapistHomePresenter(this);
         checkRememberLogin();
         InitVariable();
-        SendFCMTokenToDatabase();
         onLogoutClicked();
     }
 
     private void onLogoutClicked() {
         final Button logout = findViewById(R.id.therapist_logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutCall();
-            }
-        });
+        logout.setOnClickListener(view -> logoutCall());
     }
 
     private void logoutCall() {
@@ -54,14 +49,6 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
         }
     }
 
-    private void SendFCMTokenToDatabase() {
-        SharedPreferences savedUsername = getSharedPreferences("SavedUsername", MODE_PRIVATE);
-        String uname = savedUsername.getString("username", "");
-        if (uname != "")
-        {
-            therapistHomePresenter.SendFCMToken(uname);
-        }
-    }
 
     private void InitVariable() {
         //therapistHomePresenter = new HomePresenter(this);
@@ -70,6 +57,11 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("fcm_token_value",getIntent().getStringExtra("fcm_token"));
         editor.apply();
+
+        ((Button)this.findViewById(R.id.therapist_view_table)).setOnClickListener(v -> {
+            Intent intent = new Intent(this.getApplicationContext(), TherapistViewAppointmentActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void checkRememberLogin() {

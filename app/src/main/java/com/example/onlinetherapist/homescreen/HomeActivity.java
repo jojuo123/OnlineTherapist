@@ -17,6 +17,7 @@ import com.example.onlinetherapist.appointment.BookAppointmentActivity;
 import com.example.onlinetherapist.appointment.BookAppointmentPresenter;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 import com.example.onlinetherapist.appointment.therapist.TherapistViewAppointmentActivity;
+import com.example.onlinetherapist.noteadvice.patient.NoteAdvicePatientActivity;
 
 public class HomeActivity extends AppCompatActivity implements IHomeView {
 
@@ -86,6 +87,12 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("fcm_token_value",getIntent().getStringExtra("fcm_token"));
         editor.apply();
+
+        ((Button)this.findViewById(R.id.patient_view_notes)).setOnClickListener(v -> {
+            Intent intent = new Intent(this.getApplicationContext(), NoteAdvicePatientActivity.class);
+            intent.putExtra("username", SavedCurrentUsername());
+            startActivity(intent);
+        });
     }
 
     private void SendFCMTokenToDatabase() {
