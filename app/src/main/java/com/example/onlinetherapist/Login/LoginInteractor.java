@@ -18,4 +18,9 @@ public class LoginInteractor implements ILoginPresenter.Interactor {
     public void doSigninAdmin(Activity activity, String username, String password) {
         firebaseManagement.doSignInAdmin(activity, username,password);
     }
+
+    @Override
+    public void navigateToMainMenu(Activity loginActivity, String username) {
+        //firebaseManagement.
+    }
 }
