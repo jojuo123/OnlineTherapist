@@ -3,6 +3,7 @@ package com.example.onlinetherapist.homescreen;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.example.onlinetherapist.appointment.BookAppointmentActivity;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 
 public class HomePresenter implements IHomePresenter {
@@ -63,6 +64,12 @@ public class HomePresenter implements IHomePresenter {
     @Override
     public void onClickAdivces(Activity current, Activity viewAdvices) {
 
+    }
+
+    @Override
+    public void onClickBookAppointment(Activity current, Class<BookAppointmentActivity> bookAppointment) {
+        Intent intent = new Intent(current, bookAppointment);
+        current.startActivity(intent);
     }
 
 }

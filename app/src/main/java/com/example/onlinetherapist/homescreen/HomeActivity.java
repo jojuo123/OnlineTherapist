@@ -13,7 +13,10 @@ import android.widget.Toast;
 import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.example.onlinetherapist.R;
+import com.example.onlinetherapist.appointment.BookAppointmentActivity;
+import com.example.onlinetherapist.appointment.BookAppointmentPresenter;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
+import com.example.onlinetherapist.appointment.therapist.TherapistViewAppointmentActivity;
 
 public class HomeActivity extends AppCompatActivity implements IHomeView {
 
@@ -40,13 +43,28 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         }
 
         InitVariable();
+        onBookAppointmentClicked();
         onViewAppointmentClicked();
-
+        onBookAppointmentClicked();
         //Logout();
         //testing: delete when release
-        //FirebaseManagement.getInstance().ViewAppointmentPatient(this);
     }
-
+    private void onBookAppointmentClicked()
+    {
+        Button bookAppointment = findViewById(R.id.book_appointment);
+        bookAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent k = new Intent(HomeActivity.this, BookAppointmentActivity.class);
+                    //Intent k = new Intent(HomeActivity.this, TherapistViewAppointmentActivity.class);
+                    startActivity(k);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
     private void onViewAppointmentClicked() {
         SharedPreferences savedUsername = getSharedPreferences("SavedUsername", MODE_PRIVATE);
         final String uname = savedUsername.getString("username", "");
@@ -108,5 +126,11 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
     @Override
     public void onSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void onViewNoteClicked(View view) {
+        Intent intent=new Intent(this, com.example.onlinetherapist.noteadvice.patient.NoteAdvicePatientActivity.class);
+        intent.putExtra("username",username);
+        startActivity(intent);
     }
 }
