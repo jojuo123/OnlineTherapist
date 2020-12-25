@@ -213,7 +213,7 @@ public class FirebaseManagement {
             }
         });
     }
-    public void removeAppointment(final Date currentDate, final String userID, final onReadDataListener onReadDataListener) {
+    public void cancelAppointment( final String userID, final onReadDataListener onReadDataListener) {
         onReadDataListener.onStart();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -234,12 +234,7 @@ public class FirebaseManagement {
                         catch (ParseException e){
                             e.printStackTrace();
                         }
-                        long diff = currentDate.getTime() - bookDate.getTime();
-                        if(diff/(1000*60*60) <= 48){
-                            onReadDataListener.onSuccess(finalSnapshot,
-                                    "Failed");
-                            return;
-                        }
+
 
                         databaseReference.child(Constant.APPOINTMENT_TABLE).child(traverse.getKey().toString())
                                 .child("Status").setValue(2).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -260,6 +255,37 @@ public class FirebaseManagement {
                 onReadDataListener.onFailed(error);
             }
         });
+    }
+    public void removeAppointment( final String userID, final onReadDataListener onReadDataListener) {
+
+        onReadDataListener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot = snapshot.child(Constant.APPOINTMENT_TABLE);
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String userIdDB = "";
+                    userIdDB = traverse.child("User_ID").getValue().toString();
+                    if(userIdDB.equals(userID)){
+                        final DataSnapshot finalSnapshot = traverse;
+                        databaseReference.child(Constant.APPOINTMENT_TABLE).
+                                child(traverse.getKey().toString()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                onReadDataListener.onSuccess(finalSnapshot, "Success Remove");
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                onReadDataListener.onFailed(error);
+            }
+        });
+
+
     }
     public void store_user_infor(final IRegisterPresenter.onRegistrationListener onRegistrationListener,
                                  String username, String password, int sex, int height, int weight, String dob) {

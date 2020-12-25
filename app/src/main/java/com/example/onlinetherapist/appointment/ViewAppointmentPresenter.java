@@ -43,7 +43,7 @@ public class ViewAppointmentPresenter implements IViewAppointmentPresenter.Prese
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        firebaseManagement.removeAppointment(currentDate, uname, new onReadDataListener() {
+                        firebaseManagement.removeAppointment( uname, new onReadDataListener() {
                             @Override
                             public void onStart() {
 

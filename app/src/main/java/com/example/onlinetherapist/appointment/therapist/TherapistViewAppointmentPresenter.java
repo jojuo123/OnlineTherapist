@@ -97,6 +97,15 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                                 } else {
                                     timeRowModelTherapists.get(i).setEveningBook(t.getUser_ID());
                                 }
+
+                            }
+                            else if(t.getStatus() ==2)
+                            {
+                                if (t.getSlot() == 1) {
+                                    timeRowModelTherapists.get(i).setMorningBook("Therapist cancel");
+                                } else {
+                                    timeRowModelTherapists.get(i).setEveningBook("Therapist cancel");
+                                }
                             }
 
                         }
@@ -146,7 +155,11 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                     c2.setTextSize(size);
                     //c2.setBackgroundColor(0);
 
-                    if (timeRowModelTherapists.get(i).getMorningBook().equals("Available"))
+                    if (timeRowModelTherapists.get(i).getMorningBook().equals("Therapist cancel"))
+                    {
+                        c2.setBackground(ContextCompat.getDrawable(activity,R.drawable.therapist_cancel_button));
+                    }
+                    else if (timeRowModelTherapists.get(i).getMorningBook().equals("Available"))
                     {
                         c2.setBackground(ContextCompat.getDrawable(activity,R.drawable.available_button));
                     }
@@ -154,7 +167,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                             c2.setBackground(ContextCompat.getDrawable(activity, R.drawable.not_available_button));
                     }
                     c2.setText(timeRowModelTherapists.get(i).getMorningBook());
-                    if(!c2.getText().equals("Available")) {
+                    if(!c2.getText().equals("Available") && !c2.getText().equals("Therapist cancel") ) {
                         c2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -200,7 +213,11 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
 
                     c3.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     c3.setTextSize(size);
-                    if (timeRowModelTherapists.get(i).getEveningBook().equals("Available"))
+                    if (timeRowModelTherapists.get(i).getEveningBook().equals("Therapist cancel") )
+                    {
+                        c3.setBackground(ContextCompat.getDrawable(activity,R.drawable.therapist_cancel_button));
+                    }
+                    else if (timeRowModelTherapists.get(i).getEveningBook().equals("Available"))
                     {
                         c3.setBackground(ContextCompat.getDrawable(activity,R.drawable.available_button));
                     }
@@ -212,7 +229,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                         @Override
                         public void onClick(View v) {
                             v.startAnimation(buttonClick);
-                            if( !c3.getText().equals("Available"))
+                            if( !c3.getText().equals("Available") &&  !c3.getText().equals("Therapist cancel"))
                             {
                                 firebaseManagement.getPatientInfo(new onReadDataListener() {
                                     @Override

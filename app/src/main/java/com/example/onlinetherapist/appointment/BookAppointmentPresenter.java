@@ -186,7 +186,7 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
                 for (int i = 0; i < timeRowModels.size(); ++i) {
                     for (TimeSlotModel t : timeSlotModelArrayList) {
                         if (t.getDate().equals(timeRowModels.get(i).getDate())) {
-                            if (t.getStatus() == 1) {
+                            if (t.getStatus() == 1 || t.getStatus() ==2) {
                                 if (t.getSlot() == 1) {
                                     timeRowModels.get(i).setMorningAvailable(1);
                                 } else {
@@ -252,8 +252,6 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
                     if (timeRowModels.get(i).isMorningAvailable() == 0)
                     {
                         c2.setText("Available");
-
-
                         c2.setBackground(ContextCompat.getDrawable(activity,R.drawable.available_button));
 
                     }
