@@ -29,12 +29,12 @@ public class NoteAdapter extends ArrayAdapter<NoteModel> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
              convertView = LayoutInflater.from(getContext()).inflate(mResource, null, false);
-             NoteModel noteInfo = mData.get(position);
-             TextView noteDate=convertView.findViewById(R.id.noteDate);
-             TextView noteContent=convertView.findViewById(R.id.noteContent);
-             noteDate.setText(noteInfo.getDateString());
-             noteContent.setText(noteInfo.getContent());
         }
+        NoteModel noteInfo = mData.get(position);
+        TextView noteDate=convertView.findViewById(R.id.noteDate);
+        TextView noteContent=convertView.findViewById(R.id.noteContent);
+        noteDate.setText(noteInfo.getDateString());
+        noteContent.setText(noteInfo.getContent());
         return convertView;
         //return super.getView(position, convertView, parent);
     }

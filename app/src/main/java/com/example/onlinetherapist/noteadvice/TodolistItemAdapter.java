@@ -37,20 +37,20 @@ public class TodolistItemAdapter extends ArrayAdapter<TodolistItemModel> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView==null) {
             convertView = LayoutInflater.from(getContext()).inflate(mResource, null, false);
-            TodolistItemModel model = mData.get(position);
-            CheckBox checkBox=convertView.findViewById(R.id.todolistitemContent);
-            checkBox.setText(model.getContent());
-            int status=model.getStatus();
-            checkBox.setChecked(status != 0);
+        }
+        TodolistItemModel model = mData.get(position);
+        CheckBox checkBox=convertView.findViewById(R.id.todolistitemContent);
+        checkBox.setText(model.getContent());
+        int status=model.getStatus();
+        checkBox.setChecked(status != 0);
 
-            if (presenter != null) {
-                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        presenter.userInteractWithModel(model, b);
-                    }
-                });
-            }
+        if (presenter != null) {
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    presenter.userInteractWithModel(model, b);
+                }
+            });
         }
         return convertView;
     }

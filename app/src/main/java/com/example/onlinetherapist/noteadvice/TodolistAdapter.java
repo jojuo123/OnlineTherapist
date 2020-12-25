@@ -30,10 +30,10 @@ public class TodolistAdapter extends ArrayAdapter<TodolistModel> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView==null) {
             convertView = LayoutInflater.from(getContext()).inflate(mResource, null, false);
-            TodolistModel todolistModel = mData.get(position);
-            TextView todolistDate=convertView.findViewById(R.id.todolistDate);
-            todolistDate.setText(todolistModel.getCreated_dateString());
         }
+        TodolistModel todolistModel = mData.get(position);
+        TextView todolistDate=convertView.findViewById(R.id.todolistDate);
+        todolistDate.setText(todolistModel.getCreated_dateString());
         return convertView;
     }
 

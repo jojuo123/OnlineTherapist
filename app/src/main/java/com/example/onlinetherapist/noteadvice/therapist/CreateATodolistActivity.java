@@ -80,10 +80,14 @@ public class CreateATodolistActivity extends AppCompatActivity implements ICreat
                 TodolistItemModel model = new TodolistItemModel(Integer.toString(currentTodolist.size()),
                         current_listID, content, 0);
                 currentTodolist.add(model);
+                todolistItemAdapter.notifyDataSetChanged();
+
+                /*
                 List<TodolistItemModel> newTodolist = new ArrayList<>();
                 newTodolist.addAll(currentTodolist);
                 newTodolist.add(model);
                 todolistItemAdapter.updateDataset(newTodolist);
+                 */
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
