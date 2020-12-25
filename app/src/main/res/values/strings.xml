@@ -15,4 +15,18 @@
     <string name="todo">TODO</string>
     <string name="calling">Calling…</string>
     <string name="patient">Patient</string>
+    <string name="note_advice">Notes and advice</string>
+    <string name="note_advice_therapist">Notes and advice for patients</string>
+    <string name="hint_select_patient">Please select a patient</string>
+    <string name="todolist">Todolists</string>
+    <string name="send_note">Send new note</string>
+    <string name="create_todolistitem">Create a new todolist item</string>
+    <string name="send_todolist">Create a new todolist item</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
+    <string name="title_activity_view_a_note">ViewANoteActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

@@ -98,6 +98,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/colorAccent"
+            android:id="@+id/btnVidCallTherapist"
             />
 
         <Button

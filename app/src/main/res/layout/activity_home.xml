@@ -49,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/patient_view_notes"
+            android:onClick="onViewNoteClicked"
             android:text="Your Notes" />
         <Button
             android:layout_marginStart="15dp"

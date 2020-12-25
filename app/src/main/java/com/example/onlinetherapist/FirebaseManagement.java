@@ -18,6 +18,8 @@ import com.example.onlinetherapist.account.IRegisterPresenter;
 import com.example.onlinetherapist.appointment.IViewAppointmentPresenter;
 import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.homescreen.HomeActivity;
+import com.example.onlinetherapist.noteadvice.TodolistItemModel;
+import com.example.onlinetherapist.noteadvice.TodolistModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,8 +36,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.SimpleFormatter;
+
+import okhttp3.internal.cache.DiskLruCache;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -514,5 +519,179 @@ public class FirebaseManagement {
 
             }
         });
+    }
+
+    public void getNotes (final String userID, final onReadDataListener listener) {
+        listener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot noteInformation = null;
+                snapshot = snapshot.child(Constant.NOTE_TABLE);
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String userIdDB = "";
+                    userIdDB = traverse.child("User_ID").getValue().toString();
+                    long status = (long)traverse.child("Status").getValue();
+                    if(userIdDB.equals(userID)) {
+                        noteInformation = traverse;
+                        listener.onSuccess(noteInformation, "One element");
+                    }
+                }
+                listener.onSuccess(null, "Done");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailed(error);
+            }
+        });
+    }
+
+    public void getTodolists (final String userID, final onReadDataListener listener) {
+        listener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot todolistInformation = null;
+                snapshot = snapshot.child(Constant.TODOLIST_TABLE);
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String userIdDB = "";
+                    userIdDB = traverse.child("User_ID").getValue().toString();
+                    if(userIdDB.equals(userID)) {
+                        todolistInformation = traverse;
+                        listener.onSuccess(todolistInformation, "One element");
+                    }
+                }
+                listener.onSuccess(null, "Done");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailed(error);
+            }
+        });
+    }
+
+    public void getTodolistItems (final String listID, final onReadDataListener listener) {
+        listener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot itemInformation = null;
+                snapshot = snapshot.child(Constant.TODOLISTITEM_TABLE);
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String listIdDB = "";
+                    listIdDB = traverse.child("List_ID").getValue().toString();
+                    if(listIdDB.equals(listID)) {
+                        itemInformation = traverse;
+                        listener.onSuccess(itemInformation, "One element");
+                    }
+                }
+                listener.onSuccess(null, "Done");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailed(error);
+            }
+        });
+    }
+
+    public void setTodolistItemStatus (TodolistItemModel model, int newStatusValue, onSetValueListener listener) {
+        //onReadDataListener is a bit ridiculous... but works.
+        Map<String, Object> model_info = new HashMap<>();
+        model_info.put("Status", newStatusValue);
+        databaseReference.child(Constant.TODOLISTITEM_TABLE).child(model.getId()).updateChildren(model_info)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        listener.onSuccess("Success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        listener.onFailed(e, "Failure");
+//                        progressDialog.dismiss();
+                    }
+                });
+    }
+
+    public void newNote (String created_date, String content, String user_id, onSetValueListener listener) {
+        //First, get an id that didn't exists
+        //How to get an id that is guaranteed to be non-existent?
+        //Use the trick: The timestamp + username --> 99.99999...% to be unique.
+        String timestamp = Long.toString(System.currentTimeMillis());
+        String generated_id = timestamp + '_' + user_id;
+
+        Map<String, Object> info = new HashMap<>();
+        info.put("User_ID", user_id);
+        info.put("Status", 0);
+        info.put("ID",generated_id);
+        info.put("Date",created_date);
+        info.put("Content", content);
+
+        databaseReference.child(Constant.NOTE_TABLE).child(generated_id).setValue(info)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        listener.onSuccess("Success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        listener.onFailed(e, "Failed");
+                    }
+                });
+
+    }
+
+    public void newTodolist (TodolistModel todolist, List<TodolistItemModel> todolistItems, onSetValueListener listener) {
+
+        Map<String, Object> info = new HashMap<>();
+
+        for (TodolistItemModel item : todolistItems) {
+            info.clear();
+            info.put("ID", item.getId());
+            info.put("List_ID", item.getList_id());
+            info.put("Content", item.getContent());
+            info.put("Status", item.getStatus());
+
+            databaseReference.child(Constant.TODOLISTITEM_TABLE).child(item.getList_id()+"_"+item.getId()).setValue(info)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            listener.onSuccess("todolistitem_sucess");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            listener.onFailed(e, "todolistitem_failure");
+                        }
+                    });
+        }
+
+        info.clear();
+        info.put("ID", todolist.getId());
+        info.put("Created_Date", todolist.getCreated_dateString());
+        info.put("User_ID", todolist.getUser_id());
+
+
+        databaseReference.child(Constant.TODOLIST_TABLE).child(todolist.getId()+"_"+todolist.getUser_id()).setValue(info)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        listener.onSuccess("todolist_sucess");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        listener.onFailed(e, "todolist_failure");
+                    }
+                });
+
     }
 }
