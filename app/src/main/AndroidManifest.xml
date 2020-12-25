@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.onlinetherapist">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,9 +12,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".videocall.OutgoingActivity"></activity>
+        <activity android:name=".appointment.therapist.TherapistPatientDetailvView" />
+
+        <activity android:name=".videocall.OutgoingActivity" />
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
         <activity android:name=".videocall.IncomingActivity" />
-        <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity"></activity>
+        <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity" />
         <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
         <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity" />
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />
@@ -49,6 +53,7 @@
         </activity>
         <activity android:name=".MainActivity" />
 
+
         <service
             android:name=".MessagingService"
             android:exported="false">
@@ -57,5 +62,10 @@
             </intent-filter>
         </service>
     </application>
+
+    <uses-feature android:name="android.hardware.type.watch" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

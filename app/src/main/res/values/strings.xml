@@ -15,4 +15,10 @@
     <string name="todo">TODO</string>
     <string name="calling">Calling…</string>
     <string name="patient">Patient</string>
+    <string name="title_activity_therapist_patient_detail_view">TherapistPatientDetailView</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

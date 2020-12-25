@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.onlinetherapist.FirebaseManagement;
+import com.example.onlinetherapist.Login.Patient;
+import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.onReadDataListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -82,6 +85,21 @@ public class RegisterInteractor implements IRegisterPresenter.Interactor {
                 }
                 firebaseManagement.store_user_infor(onRegistrationListener, username, password, sex, height, weight, dob);
                 progressDialog.dismiss();
+            }
+
+            @Override
+            public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
+
+            }
+
+            @Override
+            public void onSuccessAddNewAppointment() {
+
+            }
+
+            @Override
+            public void onSuccessGetPatientInfo(Patient patient) {
+
             }
 
             @Override

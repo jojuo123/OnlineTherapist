@@ -4,11 +4,11 @@ package com.example.onlinetherapist.appointment;
 
 public class TimeRowModel{
     private String date;
-    private boolean morningAvailable;
-    private boolean eveningAvailable;
+    private int morningAvailable;
+    private int eveningAvailable;
 
 
-    public TimeRowModel(String date, boolean morningAvailable, boolean eveningAvailable) {
+    public TimeRowModel(String date, int morningAvailable, int eveningAvailable) {
         this.date = date;
         this.morningAvailable = morningAvailable;
         this.eveningAvailable = eveningAvailable;
@@ -22,19 +22,19 @@ public class TimeRowModel{
         this.date = date;
     }
 
-    public boolean isMorningAvailable() {
+    public int isMorningAvailable() {
         return morningAvailable;
     }
 
-    public void setMorningAvailable(boolean morningAvailable) {
+    public void setMorningAvailable(int morningAvailable) {
         this.morningAvailable = morningAvailable;
     }
 
-    public boolean isEveningAvailable() {
+    public int isEveningAvailable() {
         return eveningAvailable;
     }
 
-    public void setEveningAvailable(boolean eveningAvailable) {
+    public void setEveningAvailable(int eveningAvailable) {
         this.eveningAvailable = eveningAvailable;
     }
 }

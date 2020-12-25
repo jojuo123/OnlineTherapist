@@ -12,7 +12,33 @@
         android:layout_height="43dp"
         android:gravity="center"
         android:text="ONLINE THERAPIST" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
+        <TextView
+            android:id="@+id/DateTextView"
+            android:layout_width="213dp"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:text="Date:" />
+
+        <Button
+            android:id="@+id/BookButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Book this time"></Button>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        >
     <TableLayout
         android:id="@+id/TimeTable"
         android:layout_width="match_parent"
@@ -47,7 +73,7 @@
 
 
     </TableLayout>
-
+    </ScrollView>
 
 </LinearLayout>
 
