@@ -18,7 +18,8 @@
 
         <activity android:name=".noteadvice.therapist.CreateATodolistItemActivity"></activity>
         <activity android:name=".noteadvice.therapist.CreateATodolistActivity" />
-        <activity android:name=".noteadvice.therapist.CreateANoteActivity" />
+        <activity android:name=".noteadvice.therapist.CreateANoteActivity">
+        </activity>
         <activity android:name=".noteadvice.patient.ViewATodolistActivity" />
         <activity android:name=".appointment.therapist.TherapistPatientDetailvView" />
 
@@ -36,7 +37,6 @@
         <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity" />
         <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
         <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity">
-
 
         </activity>
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />

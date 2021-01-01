@@ -111,8 +111,15 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(buttonClick);
-                if (patient != null)
-                    therapistPatientDetailViewPresenter.sendNote(patient.getUsername());
+                if (patient != null) {
+                    //therapistPatientDetailViewPresenter.sendNote(patient.getUsername());
+                    String username = patient.getUsername();
+                    Intent intent=new Intent(TherapistPatientDetailvView.this,
+                            com.example.onlinetherapist.noteadvice.therapist.CreateANoteActivity.class);
+                    intent.putExtra("patient_username", username);
+                    startActivity(intent);
+                }
+
                 else
                     Toast.makeText(TherapistPatientDetailvView.this,"Patient null, please try again",Toast.LENGTH_SHORT).show();
             }
@@ -121,8 +128,14 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(buttonClick);
-                if (patient != null)
-                    therapistPatientDetailViewPresenter.createTodoList(patient.getUsername());
+                if (patient != null) {
+                    //therapistPatientDetailViewPresenter.createTodoList(patient.getUsername());
+                    String username = patient.getUsername();
+                    Intent intent=new Intent(TherapistPatientDetailvView.this,
+                            com.example.onlinetherapist.noteadvice.therapist.CreateATodolistActivity.class);
+                    intent.putExtra("patient_username", username);
+                    startActivity(intent);
+                }
                 else
                     Toast.makeText(TherapistPatientDetailvView.this,"Patient null, please try again",Toast.LENGTH_SHORT).show();
             }
