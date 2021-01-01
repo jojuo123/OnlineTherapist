@@ -28,13 +28,19 @@ public class TherapistPatientDetailViewPresenter {
     {
 
     }
-    public void cancelAppointment(String username)
+    public void sendNote(String userName)
     {
+
+    }
+    public int cancelAppointment(String username,String date)
+    {
+        final int[] dialog_value = {0};
         DialogInterface.OnClickListener dialog = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON_POSITIVE:
+                        dialog_value[0] = 1;
                         firebaseManagement.cancelAppointment(username, new onReadDataListener() {
                             @Override
                             public void onStart() {
@@ -48,11 +54,7 @@ public class TherapistPatientDetailViewPresenter {
                                 TextView height = activity.findViewById(R.id.user_height);
                                 TextView weight =activity.findViewById(R.id.user_weight);
                                 TextView sex =activity.findViewById(R.id.sex);
-                                username.setText("Profile of patient: ");
-                                dob.setText("Date of birth: ");
-                                sex.setText("Sex: ");
-                                height.setText("Height: ");
-                                weight.setText("Weight: ");
+
                                 Toast.makeText(activity,"Cancel appoinment succesful",Toast.LENGTH_SHORT).show();
                             }
 
@@ -75,16 +77,19 @@ public class TherapistPatientDetailViewPresenter {
                             public void onFailed(DatabaseError e) {
                                 Toast.makeText(activity,"Cancel appoinment fail, please try again",Toast.LENGTH_SHORT).show();
                             }
-                        });
+                        },date);
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
+                        dialog_value[0] = 0;
                         break;
                 }
             }
         };
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
         alertDialog.setTitle("Confirm Cancellation");
         alertDialog.setMessage("Are you sure to cancel the appointment?");
         alertDialog.setPositiveButton("Yes",dialog).setNegativeButton("No",dialog).show();
+        return dialog_value[0];
     }
 }

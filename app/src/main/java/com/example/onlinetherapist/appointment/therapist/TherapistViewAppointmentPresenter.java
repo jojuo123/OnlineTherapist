@@ -149,7 +149,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                     c1.setText(date);
                     c1.setTextSize(17);
                     Button c2 = new Button(activity);
-
+                    final int t = i;
 
                     c2.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     c2.setTextSize(size);
@@ -167,48 +167,52 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                             c2.setBackground(ContextCompat.getDrawable(activity, R.drawable.not_available_button));
                     }
                     c2.setText(timeRowModelTherapists.get(i).getMorningBook());
-                    if(!c2.getText().equals("Available") && !c2.getText().equals("Therapist cancel") ) {
-                        c2.setOnClickListener(new View.OnClickListener() {
+
+                    c2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 v.startAnimation(buttonClick);
-                                firebaseManagement.getPatientInfo(new onReadDataListener() {
-                                    @Override
-                                    public void onStart() {
+                                if (!c2.getText().equals("Available") && !c2.getText().equals("Therapist cancel")) {
+                                    firebaseManagement.getPatientInfo(new onReadDataListener() {
+                                        @Override
+                                        public void onStart() {
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onSuccess(DataSnapshot data, String message) {
+                                        @Override
+                                        public void onSuccess(DataSnapshot data, String message) {
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
+                                        @Override
+                                        public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onSuccessAddNewAppointment() {
+                                        @Override
+                                        public void onSuccessAddNewAppointment() {
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onSuccessGetPatientInfo(Patient patient) {
-                                        Intent intent = new Intent(activity, TherapistPatientDetailvView.class).putExtra("Patient", patient);
-                                        activity.startActivity(intent);
+                                        @Override
+                                        public void onSuccessGetPatientInfo(Patient patient) {
+                                            Intent intent = new Intent(activity, TherapistPatientDetailvView.class).putExtra("Patient", patient).putExtra("Date", timeRowModelTherapists.get(t).getDate());
+                                            activity.startActivity(intent);
+                                            activity.finish();
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onFailed(DatabaseError e) {
+                                        @Override
+                                        public void onFailed(DatabaseError e) {
 
-                                    }
-                                }, (String) c2.getText());
+                                        }
+                                    }, (String) c2.getText());
 
+                                }
                             }
                         });
-                    }
+
+
                     Button c3 = new Button(activity);
 
                     c3.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
@@ -254,8 +258,9 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
 
                                     @Override
                                     public void onSuccessGetPatientInfo(Patient patient) {
-                                        Intent intent = new Intent(activity, TherapistPatientDetailvView.class).putExtra("Patient", patient);
+                                        Intent intent = new Intent(activity, TherapistPatientDetailvView.class).putExtra("Patient", patient).putExtra("Date",timeRowModelTherapists.get(t).getDate());
                                         activity.startActivity(intent);
+                                        activity.finish();
 
                                     }
 

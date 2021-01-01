@@ -218,7 +218,7 @@ public class FirebaseManagement {
             }
         });
     }
-    public void cancelAppointment( final String userID, final onReadDataListener onReadDataListener) {
+    public void cancelAppointment( final String userID, final onReadDataListener onReadDataListener, final String Date) {
         onReadDataListener.onStart();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -227,7 +227,9 @@ public class FirebaseManagement {
                 for(DataSnapshot traverse: snapshot.getChildren()){
                     String userIdDB = "";
                     userIdDB = traverse.child("User_ID").getValue().toString();
-                    if(userIdDB.equals(userID)){
+                    String appointmentDate =" ";
+                    appointmentDate = traverse.child("Date").getValue().toString();
+                    if(userIdDB.equals(userID) && appointmentDate.equals(Date)){
                         final DataSnapshot finalSnapshot = traverse;
                         //calculate different time in order to allow cancellation
                         String bookedDate = traverse.child("Date").getValue().toString();
