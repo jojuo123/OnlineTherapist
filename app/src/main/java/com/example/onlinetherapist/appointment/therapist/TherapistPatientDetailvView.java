@@ -40,6 +40,7 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
     ImageButton videoCallButton;
     ImageButton cancelButton;
     ImageButton sendNoteButton;
+    ImageButton createTodoList;
     TherapistPatientDetailViewPresenter therapistPatientDetailViewPresenter;
     VideoCallPresenter videoCallPresenter;
 
@@ -72,6 +73,7 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
 
         videoCallButton = findViewById(R.id.VideoCallButton);
         sendNoteButton = findViewById(R.id.Sendnotes_btn);
+        createTodoList = findViewById(R.id.todiList_btn);
         AlphaAnimation buttonClick = new AlphaAnimation(0.5f, 1F);
         buttonClick.setDuration(300);
 
@@ -115,6 +117,17 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
                     Toast.makeText(TherapistPatientDetailvView.this,"Patient null, please try again",Toast.LENGTH_SHORT).show();
             }
         });
+        createTodoList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(buttonClick);
+                if (patient != null)
+                    therapistPatientDetailViewPresenter.createTodoList(patient.getUsername());
+                else
+                    Toast.makeText(TherapistPatientDetailvView.this,"Patient null, please try again",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 /*
     @Override

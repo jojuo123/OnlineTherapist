@@ -167,22 +167,25 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
         android:onClick="VideoCallPatient"
         android:layout_gravity="center"
         android:src="@drawable/videocamera32"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+
         android:id="@+id/VideoCallButton"
         android:backgroundTint="@color/colorAccent"
         />
 
     <ImageButton
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:id="@+id/Sendnotes_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:backgroundTint="@color/colorAccent"
-        />
+        android:src="@drawable/ic_baseline_notes_24" />
+
+    <ImageButton
+        android:id="@+id/todiList_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_baseline_list_alt_24" />
 
 
 </LinearLayout>

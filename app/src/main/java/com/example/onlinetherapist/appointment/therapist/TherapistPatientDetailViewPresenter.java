@@ -29,8 +29,13 @@ public class TherapistPatientDetailViewPresenter {
     }
     public void videoCall(String userName, String fcm)
     {
+
     }
     public void sendNote(String userName)
+    {
+
+    }
+    public void createTodoList(String userName)
     {
 
     }
@@ -94,4 +99,6 @@ public class TherapistPatientDetailViewPresenter {
         alertDialog.setPositiveButton("Yes",dialog).setNegativeButton("No",dialog).show();
         return dialog_value[0];
     }
+
+
 }
