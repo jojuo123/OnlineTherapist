@@ -11,6 +11,7 @@ import com.example.onlinetherapist.Login.Patient;
 import com.example.onlinetherapist.R;
 import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.onReadDataListener;
+import com.example.onlinetherapist.videocall.VideoCallPresenter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 public class TherapistPatientDetailViewPresenter {
     FirebaseManagement firebaseManagement;
     Activity activity;
+
+
     public TherapistPatientDetailViewPresenter(Activity activity)
     {
         firebaseManagement = FirebaseManagement.getInstance();
@@ -26,7 +29,6 @@ public class TherapistPatientDetailViewPresenter {
     }
     public void videoCall(String userName, String fcm)
     {
-
     }
     public void cancelAppointment(String username)
     {

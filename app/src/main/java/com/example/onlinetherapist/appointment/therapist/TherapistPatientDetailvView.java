@@ -3,6 +3,7 @@ package com.example.onlinetherapist.appointment.therapist;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.example.onlinetherapist.Login.Patient;
 import com.example.onlinetherapist.R;
 import com.example.onlinetherapist.appointment.TimeSlotModel;
 import com.example.onlinetherapist.onReadDataListener;
+import com.example.onlinetherapist.videocall.VideoCallPresenter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -37,11 +39,14 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
     Button videoCallButton;
     Button cancelButton;
     TherapistPatientDetailViewPresenter therapistPatientDetailViewPresenter;
+    VideoCallPresenter videoCallPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_therapist_patient_detail_view);
         therapistPatientDetailViewPresenter = new TherapistPatientDetailViewPresenter(this);
+        videoCallPresenter = new VideoCallPresenter();
         init();
 
 
@@ -87,25 +92,37 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
             }
         });
 
-        videoCallButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(buttonClick);
-                //video call here
-                if (patient != null)
-                    therapistPatientDetailViewPresenter.videoCall(patient.getUsername(),patient.getFcm());
-                else
-                    Toast.makeText(TherapistPatientDetailvView.this,"Patient null, please try again",Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
+//        videoCallButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                v.startAnimation(buttonClick);
+//                //video call here
+//                if (patient != null)
+//                    //therapistPatientDetailViewPresenter.videoCall(patient.getUsername(), patient.getFcm());
+//                    videoCallPresenter.VideoCallToPatient((Activity) getApplicationContext(), patient.getUsername(), patient.getFcm());
+//                else
+//                    Toast.makeText(TherapistPatientDetailvView.this,"Patient is not available, please try again",Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
     @Override
     public void onBackPressed()
     {
         Intent intent = new Intent(this,TherapistViewAppointmentActivity.class);
         startActivity(intent);
+    }
+
+    public void VideoCallPatient(View v)
+    {
+        AlphaAnimation buttonClick = new AlphaAnimation(0.5f, 1F);
+        buttonClick.setDuration(300);
+        v.startAnimation(buttonClick);
+        //video call here
+        if (patient != null)
+            //therapistPatientDetailViewPresenter.videoCall(patient.getUsername(), patient.getFcm());
+            videoCallPresenter.VideoCallToPatient(this, patient.getUsername(), patient.getFcm());
+        else
+            Toast.makeText(TherapistPatientDetailvView.this,"Patient is not available, please try again",Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -46,6 +46,7 @@
         android:layout_width="205dp"
         android:layout_height="wrap_content"
         android:text="Call this patient"
+        android:onClick="VideoCallPatient"
         android:layout_gravity="center"
         />
     <Button
