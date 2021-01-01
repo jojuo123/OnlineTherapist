@@ -710,7 +710,7 @@ public class FirebaseManagement {
         //onReadDataListener is a bit ridiculous... but works.
         Map<String, Object> model_info = new HashMap<>();
         model_info.put("Status", newStatusValue);
-        databaseReference.child(Constant.TODOLISTITEM_TABLE).child(model.getId()).updateChildren(model_info)
+        databaseReference.child(Constant.TODOLISTITEM_TABLE).child(model.getList_id()+"_"+model.getId()).updateChildren(model_info)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
