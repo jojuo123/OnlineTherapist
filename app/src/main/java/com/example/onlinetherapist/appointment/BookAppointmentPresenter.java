@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -13,6 +14,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.example.onlinetherapist.Login.Patient;
@@ -58,16 +60,31 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
 
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
                 SharedPreferences savedUsername = activity.getSharedPreferences("SavedUsername", MODE_PRIVATE);
                 final String uname = savedUsername.getString("username", "");
+                ZonedDateTime zonedDateTime = ZonedDateTime.now();
+                int cur_day = zonedDateTime.getDayOfMonth();
+                int cur_month  = zonedDateTime.getMonthValue();
+                int cur_year = zonedDateTime.getYear();
+
+
                 for (TimeSlotModel t:timeSlotModels)
                 {
-                    if (t.getUser_ID().equals(uname))
+
+                    if (t.getUser_ID().equals(uname)  && t.getStatus() ==1 )
                     {
-                        Toast.makeText(activity," Sorry, you can only book 1 slot at a time, please cancel the current slot to continue",Toast.LENGTH_SHORT).show();
-                        return;
+                        String temp = t.getDate();
+
+                        int Date = Integer.valueOf(temp.split("/")[0].toString());
+                        int Month = Integer.valueOf(temp.split("/")[1].toString());
+                        int Year = Integer.valueOf(temp.split("/")[2].toString());
+                        if( cur_year <= Year && cur_month <= Month && cur_day <Date) {
+                            Toast.makeText(activity, " Sorry, you can only book 1 slot at a time, please cancel the current slot to continue", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                     }
                 }
 

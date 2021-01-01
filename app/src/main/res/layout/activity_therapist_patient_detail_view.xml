@@ -1,63 +1,190 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".appointment.therapist.TherapistPatientDetailvView">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".appointment.therapist.TherapistPatientDetailvView">
-
+    tools:ignore="ScrollViewSize">
     <TextView
-        android:id="@+id/username"
+        android:layout_marginTop="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        ></TextView>
-
-
-    <TextView
-        android:id="@+id/dob"
+        android:text="Your Appointment"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:textStyle="bold"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:textSize="25sp"
+            android:text="Upcoming Appointment"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <ImageButton
+            android:layout_marginStart="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/CancelButton"
+            android:src="@drawable/close"
+            android:layout_gravity="end"
+            />
+    </LinearLayout>
 
-         />
-    <TextView
-        android:id="@+id/user_height"
+    <LinearLayout
+        android:layout_marginStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-         />
-    <TextView
-        android:id="@+id/user_weight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-         />
-    <TextView
-        android:id="@+id/sex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-         />
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name:"
+            android:textSize="20sp"
+            android:layout_marginEnd="20dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_marginStart="20dp"
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text=""/>
 
-    <Button
-        android:id="@+id/VideoCallButton"
-        android:layout_width="205dp"
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Height:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_marginStart="20dp"
+            android:id="@+id/user_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text=""/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Weight:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_marginStart="20dp"
+            android:id="@+id/user_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text=""/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="dob:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_marginStart="20dp"
+            android:id="@+id/dob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text=""/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Sex:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_marginStart="20dp"
+            android:id="@+id/sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text=""/>
+
+    </LinearLayout>
+
+
+    <ImageButton
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Call this patient"
         android:onClick="VideoCallPatient"
         android:layout_gravity="center"
-        />
-    <Button
-        android:id="@+id/CancelButton"
-        android:layout_width="205dp"
-        android:layout_height="wrap_content"
-        android:text="Cancel this appoinment"
-        android:layout_gravity="center"
+        android:src="@drawable/videocamera32"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/VideoCallButton"
+        android:backgroundTint="@color/colorAccent"
         />
 
+    <ImageButton
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/Sendnotes_btn"
+        android:backgroundTint="@color/colorAccent"
+        />
 
 
 </LinearLayout>
+</ScrollView>
 
