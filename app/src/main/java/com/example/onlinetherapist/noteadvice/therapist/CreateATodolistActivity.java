@@ -54,7 +54,7 @@ public class CreateATodolistActivity extends AppCompatActivity implements ICreat
         patient_username=getIntent().getStringExtra("patient_username");
         current_date=new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         currentTodolist = new ArrayList<>();
-        current_listID = Long.toString(System.currentTimeMillis());
+        current_listID = Long.toString(System.currentTimeMillis())+"_"+patient_username;
         currentTodolistModel = new TodolistModel(current_listID, patient_username, current_date);
     }
 
