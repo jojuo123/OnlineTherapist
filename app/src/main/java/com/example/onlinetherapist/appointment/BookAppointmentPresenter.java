@@ -177,7 +177,8 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
             public void onSuccessTimeSlot(ArrayList<TimeSlotModel> timeSlotModels) {
                 timeRowModels =  new ArrayList<TimeRowModel>();
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+                {
                     ZonedDateTime zonedDateTime =ZonedDateTime.now();
                     for(int i =0;i<=14;++i)
                     {

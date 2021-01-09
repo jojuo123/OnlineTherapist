@@ -788,7 +788,7 @@ public class FirebaseManagement {
         info.put("User_ID", todolist.getUser_id());
 
 
-        databaseReference.child(Constant.TODOLIST_TABLE).child(todolist.getId()+"_"+todolist.getUser_id()).setValue(info)
+        databaseReference.child(Constant.TODOLIST_TABLE).child(todolist.getId()).setValue(info)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
