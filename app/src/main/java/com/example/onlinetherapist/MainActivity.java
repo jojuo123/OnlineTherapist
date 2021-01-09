@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         LogoutButton= findViewById(R.id.logout);
 
+
 //        username=SavedCurrentUsername();
 //
 //        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
@@ -37,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //
-//        LogoutButton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                String LogOutState="Logout";
+        LogoutButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                String LogOutState="Logout";
 //                FirebaseManagement myRef= new FirebaseManagement();
 //
 //                SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
@@ -49,11 +50,10 @@ public class MainActivity extends AppCompatActivity {
 //                editor.putString("remember and login","false");
 //                editor.apply();
 //
-//                //myRef.checkActive(MainActivity.this,username,LogOutState);
 //                Intent intent= new Intent(MainActivity.this, LoginActivity.class);
 //                startActivity(intent);
-//            }
-//        });
+            }
+        });
     }
     public String SavedCurrentUsername(){
         String Username;

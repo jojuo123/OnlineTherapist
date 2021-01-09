@@ -20,6 +20,7 @@
         android:ellipsize="start"
         android:maxLength="255"
         android:maxLines="2"
+        android:textColor="@color/colorWhite"
         android:text="@string/lorem_ipsum"
         android:textSize="18sp" />
 </LinearLayout>

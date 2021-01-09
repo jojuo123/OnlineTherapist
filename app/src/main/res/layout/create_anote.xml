@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:hint="Enter content"
-        android:textSize="16sp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/buttonDone"
@@ -44,4 +44,5 @@
         android:layout_height="wrap_content"
         android:onClick="onClickCancelBtn"
         android:text="Cancel" />
+
 </LinearLayout>

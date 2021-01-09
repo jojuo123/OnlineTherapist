@@ -12,14 +12,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme.ActionBar.Transparent"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <activity android:name=".noteadvice.therapist.CreateATodolistItemActivity"></activity>
+        <activity android:name=".noteadvice.therapist.CreateATodolistItemActivity" />
         <activity android:name=".noteadvice.therapist.CreateATodolistActivity" />
-        <activity android:name=".noteadvice.therapist.CreateANoteActivity">
-        </activity>
+        <activity android:name=".noteadvice.therapist.CreateANoteActivity" />
         <activity android:name=".noteadvice.patient.ViewATodolistActivity" />
         <activity android:name=".appointment.therapist.TherapistPatientDetailvView" />
 
@@ -28,11 +27,9 @@
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
-
         <activity
             android:name=".noteadvice.patient.ViewANoteActivity"
             android:label="@string/title_activity_view_a_note" />
-
         <activity android:name=".videocall.IncomingActivity" />
         <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity" />
         <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
@@ -43,7 +40,6 @@
         <activity android:name=".homescreen.HomeActivity" />
         <activity android:name=".videocall.VideoCallActivity" />
         <activity android:name=".appointment.ViewAppointmentActivity">
-
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
@@ -53,22 +49,20 @@
         <activity
             android:name=".Login.UI.LoginActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:label="Log In">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".account.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-
 
         <service
             android:name=".MessagingService"

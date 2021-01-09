@@ -2,6 +2,7 @@ package com.example.onlinetherapist.Login.UI;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.example.onlinetherapist.Login.LoginPresenter;
 import com.example.onlinetherapist.MainActivity;
@@ -56,13 +58,15 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
             @Override
             public void onClick(View view) {
                 if(flag==0){
-                    ChangeAuthority.setText("Log in as user");
+                    ChangeAuthority.setText("Log in as User");
                     flag=1;
+                    Toast.makeText(LoginActivity.this,"Successful change authorize to Admin",Toast.LENGTH_SHORT).show();
                     RegButton.setVisibility(View.GONE);
                 }
                 else{
-                    ChangeAuthority.setText("Log in as administrator");
+                    ChangeAuthority.setText("Log in as Administrator");
                     RegButton.setVisibility(View.VISIBLE);
+                    Toast.makeText(LoginActivity.this,"Successful change authorize to User",Toast.LENGTH_SHORT).show();
                     flag=0;
                 }
             }
@@ -145,8 +149,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
         editor.putString("username",username);
         editor.apply();
     }
-
-
 
 
     @Override
