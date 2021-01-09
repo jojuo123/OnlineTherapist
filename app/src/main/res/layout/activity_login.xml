@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/lineinthesky1"
     android:orientation="vertical"
     tools:context=".Login.UI.LoginActivity">
     <ImageView
@@ -31,7 +32,9 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Username"/>
+            android:textColor="@color/colorWhite"
+            android:hint="Enter Username"
+            android:textColorHint="@color/colorWhite"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,45 +51,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType= "textPassword"
+            android:textColor="@color/colorWhite"
             android:hint="Password"
+            android:textColorHint="@color/colorWhite"
             />
     </LinearLayout>
 
     <CheckBox
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:id="@+id/rememberlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/colorWhite"
+        app:buttonTint="@color/colorWhite"
         android:text="Remember Log in"/>
     <Button
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/login"
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_button"
+        android:textColor="@color/colorWhite"
+        android:alpha="0.7"
         android:text="LOG IN"
         />
     <Button
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/register"
         android:text="REGISTER"
-        android:background="@drawable/round_button"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/round_buttton_1"
+        android:alpha="0.7"
         android:onClick="onRegisterClick"
         android:layout_marginBottom="10dp"/>
     <TextView
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:id="@+id/changeAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log in as Administrator"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         />
 
 
