@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     tools:context=".noteadvice.therapist.CreateANoteActivity"
+    android:background="@drawable/lineinthesky1"
     android:layout_height="match_parent">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Create a note"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp" />
 
     <TextView
@@ -29,6 +30,8 @@
         android:layout_height="wrap_content"
         android:text=""
         android:hint="Enter content"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:textSize="20sp" />
 
     <Button
@@ -36,6 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickDoneBtn"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/background_line"
         android:text="@string/send_note" />
 
     <Button
@@ -43,6 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickCancelBtn"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/background_line"
         android:text="Cancel" />
 
 </LinearLayout>

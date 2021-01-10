@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     tools:context=".noteadvice.therapist.CreateATodolistActivity"
+    android:background="@drawable/lineinthesky1"
     android:layout_height="match_parent">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Create a Todolist"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp" />
 
     <TextView
@@ -42,21 +43,30 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:background="@drawable/background_line"
+            android:textColor="@color/colorWhite"
             android:onClick="onClickBtnAddTodolistItem"
+            android:layout_weight="0.5"
             android:text="+" />
 
         <Button
             android:id="@+id/buttonDone"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:background="@drawable/background_line"
+            android:textColor="@color/colorWhite"
             android:onClick="onClickBtnDone"
             android:text="Send this todolist" />
 
         <Button
             android:id="@+id/btnCancel"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@drawable/background_line"
+            android:textColor="@color/colorWhite"
             android:onClick="onClickBtnCancel"
             android:text="Cancel" />
     </LinearLayout>
