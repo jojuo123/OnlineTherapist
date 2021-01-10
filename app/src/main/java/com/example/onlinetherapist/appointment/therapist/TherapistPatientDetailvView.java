@@ -66,9 +66,11 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
         sex = findViewById(R.id.sex);
         username.setText(patient.getUsername());
         dob.setText(patient.getDob());
-        sex.setText(String.valueOf(patient.getSex()));
-        height.setText(String.valueOf(patient.getHeight()));
-        weight.setText(String.valueOf(patient.getWeight()));
+        if (patient.getSex() ==1 )
+            sex.setText("Male");
+        else sex.setText("Female");
+        height.setText(String.valueOf(patient.getHeight())+ " cm");
+        weight.setText(String.valueOf(patient.getWeight())+ " kg");
 
 
         videoCallButton = findViewById(R.id.VideoCallButton);

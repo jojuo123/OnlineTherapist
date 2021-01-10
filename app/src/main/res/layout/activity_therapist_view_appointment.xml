@@ -5,13 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".appointment.therapist.TherapistViewAppointmentActivity">
+    tools:context=".appointment.therapist.TherapistViewAppointmentActivity"
+    android:background="@drawable/sky">
 
     <TextView
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:gravity="center"
-        android:text="Your schedule" />
+        android:textColor="@color/colorWhite"
+        android:text="Your schedule"
+        android:textSize="25dp"
+
+        />
 
 
 
@@ -31,7 +37,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
                     android:text="Date"
+
                     android:textSize="26sp"
 
                     />
@@ -39,7 +47,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:textColor="@color/colorWhite"
                     android:text="Morning "
                     android:textSize="26sp"
 
@@ -48,6 +56,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
                     android:text="Evening "
                     android:textSize="26sp" />
             </TableRow>

@@ -231,13 +231,16 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
                 float textSize = 17;
                 TextView t1 = new TextView(activity);
                 t1.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                t1.setTextColor(Color.WHITE);
                 t1.setText("DATE");
                 t1.setTextSize(textSize);
                 TextView t2 = new TextView(activity);
+                t2.setTextColor(Color.WHITE);
                 t2.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                 t2.setText("MORNING");
                 t2.setTextSize(textSize);
                 TextView t3 = new TextView(activity);
+                t3.setTextColor(Color.WHITE);
                 t3.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                 t3.setText("EVENING");
                 t3.setTextSize(textSize);
@@ -258,6 +261,7 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
                     TextView c1 = new TextView(activity);
                     String date = String.valueOf(timeRowModels.get(i).getDate());
                     c1.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                    c1.setTextColor(Color.WHITE);
                     c1.setText(date);
                     c1.setTextSize(17);
                     Button c2 = new Button(activity);
@@ -265,6 +269,7 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
 
                     c2.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     c2.setTextSize(size);
+
                     //c2.setBackgroundColor(0);
 
                     if (timeRowModels.get(i).isMorningAvailable() == 0)
@@ -298,6 +303,7 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
 
                     c3.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     c3.setTextSize(size);
+
                     if (timeRowModels.get(i).isEveningAvailable() == 0) {
                         c3.setBackground(ContextCompat.getDrawable(activity,R.drawable.available_button));
                         c3.setText("Available");

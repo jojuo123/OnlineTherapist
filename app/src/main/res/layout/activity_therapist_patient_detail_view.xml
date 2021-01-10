@@ -1,20 +1,21 @@
-
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".appointment.therapist.TherapistPatientDetailvView">
+tools:context=".appointment.therapist.TherapistPatientDetailvView"
+    android:background="@drawable/sky"    >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:ignore="ScrollViewSize">
+    tools:ignore="ScrollViewSize"
+    >
     <TextView
         android:layout_marginTop="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
         android:text="Your Appointment"
         android:textAlignment="center"
         android:textSize="30sp"
@@ -28,6 +29,7 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
             android:textSize="25sp"
+            android:textColor="@color/colorWhite"
             android:text="Upcoming Appointment"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -51,6 +53,7 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
             android:text="User Name:"
             android:textSize="20sp"
             android:layout_marginEnd="20dp"
@@ -61,6 +64,7 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             android:text=""/>
 
@@ -76,12 +80,14 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
             android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:textColor="@color/colorWhite"
             android:text="Height:"
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
             android:layout_marginStart="20dp"
             android:id="@+id/user_height"
+            android:textColor="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -99,12 +105,15 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
             android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:textColor="@color/colorWhite"
             android:text="Weight:"
+
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
             android:layout_marginStart="20dp"
             android:id="@+id/user_weight"
+            android:textColor="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -122,12 +131,14 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
             android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:textColor="@color/colorWhite"
             android:text="dob:"
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
             android:layout_marginStart="20dp"
             android:id="@+id/dob"
+            android:textColor="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -145,11 +156,13 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
             android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:textColor="@color/colorWhite"
             android:text="Sex:"
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
             android:layout_marginStart="20dp"
+            android:textColor="@color/colorWhite"
             android:id="@+id/sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,31 +173,32 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView">
 
 
     <ImageButton
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Call this patient"
-        android:onClick="VideoCallPatient"
-        android:layout_gravity="center"
-        android:src="@drawable/videocamera32"
-
         android:id="@+id/VideoCallButton"
-        android:backgroundTint="@color/colorAccent"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_line"
+        android:onClick="VideoCallPatient"
+        android:src="@drawable/videocamera32"
+        android:text="Call this patient" />
 
     <ImageButton
         android:id="@+id/Sendnotes_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:backgroundTint="@color/colorAccent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_line"
         android:src="@drawable/ic_baseline_notes_24" />
 
     <ImageButton
         android:id="@+id/todiList_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTint="@color/colorAccent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_line"
         android:src="@drawable/ic_baseline_list_alt_24" />
 
 

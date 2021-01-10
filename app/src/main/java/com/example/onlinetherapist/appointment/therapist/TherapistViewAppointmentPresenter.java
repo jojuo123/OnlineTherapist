@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -119,15 +120,20 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                 float textSize = 17;
                 TextView t1 = new TextView(activity);
                 t1.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                t1.setTextColor(Color.WHITE);
                 t1.setText("DATE");
                 t1.setTextSize(textSize);
                 TextView t2 = new TextView(activity);
                 t2.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                t2.setTextColor(Color.WHITE);
                 t2.setText("MORNING");
+
                 t2.setTextSize(textSize);
                 TextView t3 = new TextView(activity);
                 t3.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                t3.setTextColor(Color.WHITE);
                 t3.setText("EVENING");
+
                 t3.setTextSize(textSize);
                 TableRow tableRow = new TableRow(activity);
                 tableRow.addView(t1);
@@ -146,13 +152,16 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                     TextView c1 = new TextView(activity);
                     String date = String.valueOf(timeRowModelTherapists.get(i).getDate());
                     c1.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                    c1.setTextColor(Color.WHITE);
                     c1.setText(date);
+
                     c1.setTextSize(17);
                     Button c2 = new Button(activity);
                     final int t = i;
 
                     c2.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     c2.setTextSize(size);
+
                     //c2.setBackgroundColor(0);
 
                     if (timeRowModelTherapists.get(i).getMorningBook().equals("Therapist cancel"))
@@ -217,6 +226,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
 
                     c3.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     c3.setTextSize(size);
+
                     if (timeRowModelTherapists.get(i).getEveningBook().equals("Therapist cancel") )
                     {
                         c3.setBackground(ContextCompat.getDrawable(activity,R.drawable.therapist_cancel_button));
