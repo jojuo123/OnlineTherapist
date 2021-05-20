@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.onlinetherapist.Activities.Home;
+import com.example.onlinetherapist.Constant;
 import com.example.onlinetherapist.R;
 
 import com.example.onlinetherapist.videocall.OutgoingActivity;
@@ -29,9 +31,15 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
         setContentView(R.layout.activity_therapist_home);
         username = TherapistSavedCurrentUsername();
         therapistHomePresenter = new TherapistHomePresenter(this);
-        checkRememberLogin();
+
         InitVariable();
-        onLogoutClicked();
+        Constant.isTherapist = true;
+        startActivity(new Intent(TherapistHomeActivity.this, Home.class));
+        finish();
+
+//        checkRememberLogin();
+//
+//        onLogoutClicked();
     }
 
     private void onLogoutClicked() {

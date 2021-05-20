@@ -35,6 +35,8 @@ public class Constant {
 
     public static final String REMOTE_MSG_MEETING_ROOM = "meetingRoom";
 
+    public static boolean isTherapist = false;
+
     public static HashMap<String, String> getRemoteMessageHeader()
     {
         HashMap<String, String> headers = new HashMap<>();

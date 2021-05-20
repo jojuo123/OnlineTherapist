@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.onlinetherapist.Activities.Home;
+import com.example.onlinetherapist.Constant;
 import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
 import com.example.onlinetherapist.R;
@@ -22,6 +24,7 @@ import com.example.onlinetherapist.noteadvice.patient.NoteAdvicePatientActivity;
 public class HomeActivity extends AppCompatActivity implements IHomeView {
 
     IHomePresenter homePresenter;
+
     String username;
 
     @Override
@@ -42,11 +45,19 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
             editor.putString("remember and login","false");
             editor.apply();
         }
-
         InitVariable();
+        Constant.isTherapist = false;
+        startActivity(new Intent(HomeActivity.this, Home.class));
+        finish();
+
+
+
         onBookAppointmentClicked();
         onViewAppointmentClicked();
         onBookAppointmentClicked();
+
+
+
         //Logout();
         //testing: delete when release
     }
