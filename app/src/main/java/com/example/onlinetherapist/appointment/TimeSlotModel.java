@@ -5,7 +5,7 @@ import com.google.firebase.database.PropertyName;
 public class TimeSlotModel {
     private String Date;
     private long Slot;
-    private long Status;
+    private long Status; // 1 is appointment, 2 is cancel
     private String User_ID;
 
 

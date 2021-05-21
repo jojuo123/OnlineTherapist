@@ -9,7 +9,7 @@ public interface ILoginPresenter {
         void authorize(Activity activity, String username, String password);
         void Adminauthorize(Activity activity,String username, String password);
 
-        void navigateToMainMenu(Activity loginActivity, String username);
+//        void navigateToMainMenu(Activity loginActivity, String username);
     }
     interface View{
 
@@ -18,6 +18,6 @@ public interface ILoginPresenter {
         void doSignin(Activity activity,String username, String password);
         void doSigninAdmin(Activity activity,String username, String password);
 
-        void navigateToMainMenu(Activity loginActivity, String username);
+//        void navigateToMainMenu(Activity loginActivity, String username);
     }
 }

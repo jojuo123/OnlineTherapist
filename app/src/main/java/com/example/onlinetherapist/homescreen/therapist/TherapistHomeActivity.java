@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.onlinetherapist.Activities.Home;
 import com.example.onlinetherapist.Constant;
@@ -31,6 +32,8 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
         setContentView(R.layout.activity_therapist_home);
         username = TherapistSavedCurrentUsername();
         therapistHomePresenter = new TherapistHomePresenter(this);
+
+//        checkRememberLogin();
 
         InitVariable();
         Constant.isTherapist = true;
@@ -71,20 +74,20 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
         });
     }
 
-    private void checkRememberLogin() {
-        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
-        String checkbox= preferences.getString("remember","");
-        if(checkbox.equals("true")){
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("remember and login","true");
-            editor.apply();
-        }
-        else{
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("remember and login","false");
-            editor.apply();
-        }
-    }
+//    private void checkRememberLogin() {
+//        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+//        String checkbox= preferences.getString("remember","");
+//        if(checkbox.equals("true")){
+//            SharedPreferences.Editor editor=preferences.edit();
+//            editor.putString("remember and login","true");
+//            editor.apply();
+//        }
+//        else{
+//            SharedPreferences.Editor editor=preferences.edit();
+//            editor.putString("remember and login","false");
+//            editor.apply();
+//        }
+//    }
 
     public String TherapistSavedCurrentUsername(){
         String Username;

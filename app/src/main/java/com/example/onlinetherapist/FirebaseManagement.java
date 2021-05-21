@@ -344,6 +344,9 @@ public class FirebaseManagement {
 //                            activity.startActivity(intent);
                             SendFCMTokenPatient(activity, p.getUsername());
                         }
+                        else {
+                            Toast.makeText(activity, "Incorrect password", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
                 else{
@@ -369,10 +372,14 @@ public class FirebaseManagement {
                         Admin p = user.getValue(Admin.class);
                         assert p != null;
                         if (p.getPassword().equals(password)) {
-                            Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(activity, "Log in successful", Toast.LENGTH_SHORT).show();
                             SendFCMTokenTherapist(activity, p.getUsername());
                             //break;
                         }
+                        else {
+                            Toast.makeText(activity, "Incorrect password", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 }
                 else{
@@ -544,8 +551,8 @@ public class FirebaseManagement {
                     Log.d("success", "LO suc");
                     SharedPreferences preferences = activity.getSharedPreferences("checkbox", MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
-                    editor.putString("remember","false");
-                    editor.putString("remember and login","false");
+                    editor.putBoolean("remember",false);
+//                    editor.putString("remember and login","false");
                     editor.apply();
                     activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
                     activity.finish();

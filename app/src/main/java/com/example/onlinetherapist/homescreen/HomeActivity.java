@@ -34,17 +34,18 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         username=SavedCurrentUsername();
         homePresenter = new HomePresenter(this);
         SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
-        String checkbox= preferences.getString("remember","");
-        if(checkbox.equals("true")){
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("remember and login","true");
-            editor.apply();
-        }
-        else{
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("remember and login","false");
-            editor.apply();
-        }
+//        String checkbox= preferences.getString("remember","");
+//        Toast.makeText(this,checkbox,Toast.LENGTH_LONG).show();
+//        if(checkbox.equals("true")){
+//            SharedPreferences.Editor editor=preferences.edit();
+//            editor.putString("remember and login","true");
+//            editor.apply();
+//        }
+//        else{
+//            SharedPreferences.Editor editor=preferences.edit();
+//            editor.putString("remember and login","false");
+//            editor.apply();
+//        }
         InitVariable();
         Constant.isTherapist = false;
         startActivity(new Intent(HomeActivity.this, Home.class));
