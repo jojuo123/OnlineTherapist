@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,14 @@ public class TherapistViewAppointmentActivity extends AppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_therapist_view_appointment);
-        therapistViewAppointmentPresenter.queryTimeSlotData();
+//        therapistViewAppointmentPresenter.queryTimeSlotData();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("AAA","onresume");
+        therapistViewAppointmentPresenter.queryTimeSlotData();
     }
 }

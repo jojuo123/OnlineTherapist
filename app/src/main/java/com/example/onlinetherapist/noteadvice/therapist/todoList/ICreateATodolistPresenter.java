@@ -1,4 +1,4 @@
-package com.example.onlinetherapist.noteadvice.therapist;
+package com.example.onlinetherapist.noteadvice.therapist.todoList;
 
 import com.example.onlinetherapist.noteadvice.TodolistItemModel;
 import com.example.onlinetherapist.noteadvice.TodolistModel;
@@ -7,5 +7,5 @@ import com.example.onlinetherapist.onSetValueListener;
 import java.util.List;
 
 public interface ICreateATodolistPresenter {
-    void uploadNewTodolist (TodolistModel todolistModel, List<TodolistItemModel> todolistItemModels);
+    void uploadNewTodolist (TodolistModel todolistModel, List<TodolistItemModel> todolistItemModels, boolean save);
 }

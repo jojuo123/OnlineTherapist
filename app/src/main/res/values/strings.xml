@@ -41,4 +41,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--  string  for the medical record-->
+    <string name="medical_record">MEDICAL RECORD</string>
+    <string name="therapist_name">Therapist\'s name: </string>
+    <string name="patient_name">Patient\'s name: </string>
+    <string name="problem">Problems: </string>
+    <string name="diagnosis">Diagnosis: </string>
+    <string name="treatment">Treatment/Medication: </string>
+    <string name="add_todo_list">Add to-do list</string>
+    <string name="add_notes">Add notes</string>
+    <string name="date">Date: </string>
+    <string name="save">Save</string>
+
 </resources>

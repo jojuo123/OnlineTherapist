@@ -1,9 +1,10 @@
 package com.example.onlinetherapist.noteadvice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodolistModel {
+public class TodolistModel implements Serializable {
     public String getId() {
         return id;
     }

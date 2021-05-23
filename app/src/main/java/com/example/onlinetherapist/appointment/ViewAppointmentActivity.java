@@ -32,7 +32,8 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_appointment);
-      presenter = new ViewAppointmentPresenter((IViewAppointmentView) this);
+
+        presenter = new ViewAppointmentPresenter((IViewAppointmentView) this);
         displayAppointment();
         onCancelClicked();
         initVariable();
@@ -88,10 +89,12 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
         }
     }
 
-    private void refresh() {
-        finish();
-        startActivity(getIntent());
-    }
+
+    //    private void refresh() {
+//        finish();
+//        startActivity(getIntent());
+//    }
+
 
     public void displayAppointment(){
         timeAppointment = findViewById(R.id.time_appointment);
@@ -99,16 +102,16 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
         //statusAppointment = findViewById(R.id.status_appointment);
 
         presenter.retrieveAppointment(this, timeAppointment, dateAppointment);
-
     }
+
     public void onCancelClicked(){
 
         cancelAppointment = findViewById(R.id.cancel_appointment);
+
         cancelAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.cancellation(ViewAppointmentActivity.this);
-
             }
         });
     }
@@ -120,5 +123,15 @@ public class ViewAppointmentActivity extends AppCompatActivity implements IViewA
     @Override
     public void onSuccessCancel(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        dateAppointment.setText("None");
+        timeAppointment.setText("None");
     }
+
+    @Override
+    public void disableCancelButton() {
+        cancelAppointment.setOnClickListener(null);
+        cancelAppointment.setVisibility(View.GONE);
+    }
+
+
 }

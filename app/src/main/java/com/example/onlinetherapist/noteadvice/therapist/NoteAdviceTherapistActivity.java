@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.onlinetherapist.R;
+import com.example.onlinetherapist.noteadvice.therapist.note.CreateANoteActivity;
+import com.example.onlinetherapist.noteadvice.therapist.todoList.CreateATodolistActivity;
 
 public class NoteAdviceTherapistActivity extends AppCompatActivity implements INoteAdviceTherapistView {
 

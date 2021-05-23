@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import com.example.onlinetherapist.Constant;
 import com.example.onlinetherapist.Login.Admin;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
+import com.example.onlinetherapist.MedicalRecord.patient.MedicalRecordMainActivity;
 import com.example.onlinetherapist.appointment.BookAppointmentActivity;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 import com.example.onlinetherapist.appointment.therapist.TherapistViewAppointmentActivity;
@@ -188,10 +189,6 @@ public class Home extends AppCompatActivity
 
     }
 
-
-
-
-
     private void openGallery() {
         //TODO: open gallery intent and wait for user to pick an image !
 
@@ -199,8 +196,6 @@ public class Home extends AppCompatActivity
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent,REQUESCODE);
     }
-
-
 
     // when user picked an image ...
     @Override
@@ -215,11 +210,6 @@ public class Home extends AppCompatActivity
             popupPostImage.setImageURI(pickedImgUri);
         }
     }
-
-
-
-
-
 
     private void iniPopup() {
 
@@ -317,8 +307,6 @@ public class Home extends AppCompatActivity
             }
         });
 
-
-
     }
 
     private void addPost(Post post) {
@@ -398,11 +386,16 @@ public class Home extends AppCompatActivity
     }
 
 
-
     public void PatientViewAppointment()
     {
         homePresenter.onClickAppointment(Home.this,
                 ViewAppointmentActivity.class, patient_admin_uname, "");
+    }
+
+    public void PatientViewRecords(){
+        Intent intent = new Intent(Home.this, MedicalRecordMainActivity.class);
+        intent.putExtra("username",SavedCurrentUsername());
+        startActivity(intent);
     }
 
     public void PatientViewTodo()
@@ -411,7 +404,6 @@ public class Home extends AppCompatActivity
         intent.putExtra("username", SavedCurrentUsername());
         startActivity(intent);
     }
-
 
     public void PatientLogout()
     {
@@ -466,6 +458,10 @@ public class Home extends AppCompatActivity
         else if (id == R.id.nav_todo)
         {
             PatientViewTodo();
+            return true;
+        }
+        else if(id == R.id.nav_records){
+            PatientViewRecords();
             return true;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

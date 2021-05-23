@@ -201,7 +201,15 @@ tools:context=".appointment.therapist.TherapistPatientDetailvView"
         android:background="@drawable/background_line"
         android:src="@drawable/ic_baseline_list_alt_24" />
 
-
+    <ImageButton
+        android:id="@+id/btnMedicalRecord"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_line"
+        android:src="@drawable/ic_baseline_content_paste_24"
+        />
 </LinearLayout>
 </ScrollView>
 

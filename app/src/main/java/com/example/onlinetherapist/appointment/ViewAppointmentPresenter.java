@@ -55,8 +55,9 @@ public class ViewAppointmentPresenter implements IViewAppointmentPresenter.Prese
                                     view.onFailCancel("You Can Only Cancel The Appointment Before It's Held 2 days");
                                 else if(message.equals("Success Remove")) {
                                     view.onSuccessCancel("Your Appointment has been removed!");
-                                    activity.finish();
-                                    activity.startActivity(activity.getIntent());
+                                    view.disableCancelButton();
+//                                    activity.finish();
+//                                    activity.startActivity(activity.getIntent());
                                 }
                             }
 
@@ -125,10 +126,11 @@ public class ViewAppointmentPresenter implements IViewAppointmentPresenter.Prese
                             timeAppointment.setText(time);
                             dateAppointment.setText(date);
                         }
-                        else{
+                        else {
                             String status = "None";
                             timeAppointment.setText(status);
                             dateAppointment.setText(status);
+                            view.disableCancelButton();
                         }
                         progressDialog.dismiss();
                     }

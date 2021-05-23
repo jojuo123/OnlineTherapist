@@ -66,7 +66,7 @@
                 />
             <TextView
                 android:layout_marginStart="20dp"
-                android:id="@+id/time_appointment"
+                android:id="@+id/date_appointment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -90,7 +90,7 @@
                 />
             <TextView
                 android:layout_marginStart="20dp"
-                android:id="@+id/date_appointment"
+                android:id="@+id/time_appointment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"

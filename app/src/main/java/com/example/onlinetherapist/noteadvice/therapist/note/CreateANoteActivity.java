@@ -1,8 +1,10 @@
-package com.example.onlinetherapist.noteadvice.therapist;
+package com.example.onlinetherapist.noteadvice.therapist.note;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ public class CreateANoteActivity extends AppCompatActivity implements ICreateANo
 
     String patient_username;
     String current_date;
+    boolean save=true;
 
     EditText edContent;
     TextView tvNoteDate;
@@ -38,17 +41,27 @@ public class CreateANoteActivity extends AppCompatActivity implements ICreateANo
     }
 
     private void initData() {
-        patient_username=getIntent().getStringExtra("patient_username");
+        Intent intent = getIntent();
+        patient_username=intent.getStringExtra("patient_username");
+        save = intent.getBooleanExtra("save",true);
         current_date=new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-
     }
 
     public void onClickCancelBtn(View view) {
+        setResult(RESULT_CANCELED);
         finish();
     }
 
 
     public void onClickDoneBtn(View view) {
-        presenter.createANote(current_date, edContent.getText().toString(), patient_username);
+        presenter.createANote(current_date, edContent.getText().toString(), patient_username,save);
+    }
+
+    @Override
+    public void setResultFinish() {
+        Intent intent = new Intent();
+        intent.putExtra("content",edContent.getText().toString());
+        setResult(RESULT_OK,intent);
+        finish();
     }
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    tools:context=".noteadvice.therapist.CreateANoteActivity"
+    tools:context=".noteadvice.therapist.note.CreateANoteActivity"
     android:background="@drawable/lineinthesky1"
     android:layout_height="match_parent">
 

@@ -1,4 +1,4 @@
-package com.example.onlinetherapist.noteadvice.therapist;
+package com.example.onlinetherapist.noteadvice.therapist.todoList;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +13,10 @@ import com.example.onlinetherapist.R;
 import com.example.onlinetherapist.noteadvice.TodolistItemAdapter;
 import com.example.onlinetherapist.noteadvice.TodolistItemModel;
 import com.example.onlinetherapist.noteadvice.TodolistModel;
-import com.google.android.gms.common.api.ResultTransform;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class CreateATodolistActivity extends AppCompatActivity implements ICreateATodolistView {
 
@@ -30,10 +28,11 @@ public class CreateATodolistActivity extends AppCompatActivity implements ICreat
     private TextView tvNoteDate;
 
     ICreateATodolistPresenter presenter;
-    List<TodolistItemModel> currentTodolist;
+    ArrayList<TodolistItemModel> currentTodolist;
     TodolistModel currentTodolistModel;
     TodolistItemAdapter todolistItemAdapter;
 
+    boolean save = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +50,22 @@ public class CreateATodolistActivity extends AppCompatActivity implements ICreat
     }
 
     private void initData() {
-        patient_username=getIntent().getStringExtra("patient_username");
+        Intent intent = getIntent();
+        save = intent.getBooleanExtra("save",true);
+        patient_username=intent.getStringExtra("patient_username");
         current_date=new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         currentTodolist = new ArrayList<>();
         current_listID = Long.toString(System.currentTimeMillis())+"_"+patient_username;
         currentTodolistModel = new TodolistModel(current_listID, patient_username, current_date);
     }
 
-    public void onClickBtnCancel(View view) { finish(); }
+    public void onClickBtnCancel(View view) {
+        setResult(RESULT_CANCELED);
+        finish();
+    }
 
     public void onClickBtnDone(View view) {
-        presenter.uploadNewTodolist(currentTodolistModel, currentTodolist);
+        presenter.uploadNewTodolist(currentTodolistModel, currentTodolist,save);
     }
 
     public void onClickBtnAddTodolistItem(View view) {
@@ -91,5 +95,14 @@ public class CreateATodolistActivity extends AppCompatActivity implements ICreat
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void setResultFinish() {
+        Intent intent = new Intent();
+        intent.putExtra("todolist",currentTodolistModel);
+        intent.putExtra("todoitemlist", currentTodolist);
+        setResult(RESULT_OK,intent);
+        finish();
     }
 }

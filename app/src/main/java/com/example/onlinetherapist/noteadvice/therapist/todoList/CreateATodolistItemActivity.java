@@ -1,4 +1,4 @@
-package com.example.onlinetherapist.noteadvice.therapist;
+package com.example.onlinetherapist.noteadvice.therapist.todoList;
 
 import androidx.appcompat.app.AppCompatActivity;
 

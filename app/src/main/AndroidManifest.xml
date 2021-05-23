@@ -4,9 +4,10 @@
     package="com.example.onlinetherapist">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -18,12 +19,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <activity android:name=".noteadvice.therapist.CreateATodolistItemActivity" />
-        <activity android:name=".noteadvice.therapist.CreateATodolistActivity" />
-        <activity android:name=".noteadvice.therapist.CreateANoteActivity" />
+        <activity android:name=".MedicalRecord.therapist.CreateMedicalRecordActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".MedicalRecord.patient.MedicalRecordMainActivity"></activity>
+        <activity android:name=".MedicalRecord.patient.ViewMedicalRecordActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".noteadvice.therapist.todoList.CreateATodolistItemActivity" />
+        <activity android:name=".noteadvice.therapist.todoList.CreateATodolistActivity" />
+        <activity android:name=".noteadvice.therapist.note.CreateANoteActivity" />
         <activity android:name=".noteadvice.patient.ViewATodolistActivity" />
         <activity android:name=".appointment.therapist.TherapistPatientDetailvView" />
-
         <activity android:name=".videocall.OutgoingActivity" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
@@ -35,13 +40,12 @@
         <activity android:name=".videocall.IncomingActivity" />
         <activity android:name=".appointment.therapist.TherapistViewAppointmentActivity" />
         <activity android:name=".homescreen.therapist.TherapistHomeActivity" />
-        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity">
-
-        </activity>
+        <activity android:name=".noteadvice.therapist.NoteAdviceTherapistActivity" />
         <activity android:name=".noteadvice.patient.NoteAdvicePatientActivity" />
         <activity android:name=".homescreen.HomeActivity" />
         <activity android:name=".videocall.VideoCallActivity" />
         <activity android:name=".appointment.ViewAppointmentActivity">
+
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
@@ -54,6 +58,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -64,16 +69,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-
         <activity android:name=".Activities.PostDetailActivity" />
         <activity
             android:name=".Activities.Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                &lt;!&ndash;                <category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;-->
-<!--            </intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- &lt;!&ndash;                <category android:name="android.intent.category.LAUNCHER" />&ndash;&gt; -->
+            <!-- </intent-filter> -->
         </activity>
 
         <service
@@ -83,12 +88,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

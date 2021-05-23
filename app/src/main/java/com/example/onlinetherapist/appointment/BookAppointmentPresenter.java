@@ -45,8 +45,8 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
         this.activity = activity   ;
         this.iBookAppointmentView = iBookAppointmentView;
         firebaseManagement = FirebaseManagement.getInstance();
-
     }
+
     public void bookAppointmentAt(final Activity activity,String time)
     {
         firebaseManagement.getTimeSlot(new onReadDataListener() {
@@ -156,6 +156,7 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
         });
 
     }
+
     public void queryTimeSlotData()
     {
         final ProgressDialog progressDialog = new ProgressDialog(activity);
@@ -249,8 +250,6 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
                 tableRow.addView(t2);
                 tableRow.addView(t3);
                 timeSlotTable.addView(tableRow);
-
-
 
 
                 AlphaAnimation buttonClick = new AlphaAnimation(0.5f, 1F);
@@ -355,6 +354,5 @@ public class BookAppointmentPresenter implements IBookAppointmentPresenter{
             }
         });
     }
-
 
 }

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lineinthesky1"
+
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".noteadvice.patient.ViewATodolistActivity"
+        android:layout_marginTop="50dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="5dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/medical_record"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".60"
+                    android:text="@string/therapist_name"
+                    android:textColor="@color/colorWhite"
+                    android:textSize = "20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvTherapistname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".40"
+                    android:gravity="end"
+                    android:textSize = "20sp"
+                    android:textColor="@color/colorWhite"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".60"
+                    android:text="@string/patient_name"
+                    android:textColor="@color/colorWhite"
+                    android:textSize = "20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvPatientname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".40"
+                    android:gravity="end"
+                    android:textSize = "20sp"
+                    android:textColor="@color/colorWhite"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".60"
+                    android:text="@string/date"
+                    android:textColor="@color/colorWhite"
+                    android:textSize = "20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvDateCreated"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".40"
+                    android:gravity="end"
+                    android:textSize = "20sp"
+                    android:textColor="@color/colorWhite"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:text="@string/problem"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_edittext">
+                <EditText
+                    android:id="@+id/editTextProblemDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:minLines="4"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorWhite"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:hint="Enter description here..."
+                    android:importantForAutofill="no"
+                    android:textColorHint="@color/colorWhite" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:text="@string/diagnosis"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_edittext">
+                <EditText
+                    android:id="@+id/editTextDiagnosis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="2"
+                    android:minLines="2"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorWhite"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:hint="Enter diagnosis here..."
+                    android:importantForAutofill="no"
+                    android:textColorHint="@color/colorWhite" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:text="@string/treatment"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_edittext">
+                <EditText
+                    android:id="@+id/editTextTreatment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:minLines="3"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorWhite"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:hint="Enter diagnosis here..."
+                    android:importantForAutofill="no"
+                    android:textColorHint="@color/colorWhite" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/btnTodolist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/background_line"
+                    android:drawableLeft="@drawable/ic_baseline_list_alt_24"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/add_todo_list" />
+
+                <Button
+                    android:id="@+id/btnNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnTodolist"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignStart="@+id/btnTodolist"
+                    android:layout_alignEnd="@+id/btnTodolist"
+                    android:background="@drawable/background_line"
+                    android:drawableLeft="@drawable/ic_baseline_notes_24"
+                    android:drawablePadding="20dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:text="@string/add_notes" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnNote"
+                    android:layout_alignStart="@+id/btnNote"
+                    android:layout_alignEnd="@+id/btnNote"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/background_line"
+                    android:text="@string/save" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

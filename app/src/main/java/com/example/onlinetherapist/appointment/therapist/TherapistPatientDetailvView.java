@@ -1,35 +1,27 @@
 package com.example.onlinetherapist.appointment.therapist;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.Login.Patient;
+import com.example.onlinetherapist.MedicalRecord.therapist.CreateMedicalRecordActivity;
 import com.example.onlinetherapist.R;
-import com.example.onlinetherapist.appointment.TimeSlotModel;
-import com.example.onlinetherapist.onReadDataListener;
+import com.example.onlinetherapist.noteadvice.therapist.note.CreateANoteActivity;
+import com.example.onlinetherapist.noteadvice.therapist.todoList.CreateATodolistActivity;
 import com.example.onlinetherapist.videocall.VideoCallPresenter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
-public class TherapistPatientDetailvView extends AppCompatActivity {
+public class TherapistPatientDetailvView extends AppCompatActivity implements ITherapistPatientDetailViewContract.View{
 
     Patient patient;
     TextView dob ;
@@ -41,18 +33,17 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
     ImageButton cancelButton;
     ImageButton sendNoteButton;
     ImageButton createTodoList;
-    TherapistPatientDetailViewPresenter therapistPatientDetailViewPresenter;
+    ImageButton imgBtnMedicalRecord;
+    TherapistPatientDetailViewPresenter presenter;
     VideoCallPresenter videoCallPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_therapist_patient_detail_view);
-        therapistPatientDetailViewPresenter = new TherapistPatientDetailViewPresenter(this);
+        presenter = new TherapistPatientDetailViewPresenter(this);
         videoCallPresenter = new VideoCallPresenter();
         init();
-
-
 
     }
 
@@ -76,21 +67,19 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
         videoCallButton = findViewById(R.id.VideoCallButton);
         sendNoteButton = findViewById(R.id.Sendnotes_btn);
         createTodoList = findViewById(R.id.todiList_btn);
+        imgBtnMedicalRecord = findViewById(R.id.btnMedicalRecord);
+
         AlphaAnimation buttonClick = new AlphaAnimation(0.5f, 1F);
         buttonClick.setDuration(300);
 
         cancelButton = findViewById(R.id.CancelButton);
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.startAnimation(buttonClick);
                 //video call here
-                if(patient !=null) {
-                    if( therapistPatientDetailViewPresenter.cancelAppointment(patient.getUsername(),Date) ==1)
-                        patient = null;
-
-                }
+                if(patient !=null)
+                    presenter.cancelAppointment(patient.getUsername(),Date);
                 else Toast.makeText(TherapistPatientDetailvView.this,"Patient null, please try again",Toast.LENGTH_SHORT).show();
 
             }
@@ -117,8 +106,9 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
                     //therapistPatientDetailViewPresenter.sendNote(patient.getUsername());
                     String username = patient.getUsername();
                     Intent intent=new Intent(TherapistPatientDetailvView.this,
-                            com.example.onlinetherapist.noteadvice.therapist.CreateANoteActivity.class);
+                            CreateANoteActivity.class);
                     intent.putExtra("patient_username", username);
+                    intent.putExtra("save",true);
                     startActivity(intent);
                 }
 
@@ -126,6 +116,7 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
                     Toast.makeText(TherapistPatientDetailvView.this,"Patient null, please try again",Toast.LENGTH_SHORT).show();
             }
         });
+
         createTodoList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,8 +125,9 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
                     //therapistPatientDetailViewPresenter.createTodoList(patient.getUsername());
                     String username = patient.getUsername();
                     Intent intent=new Intent(TherapistPatientDetailvView.this,
-                            com.example.onlinetherapist.noteadvice.therapist.CreateATodolistActivity.class);
+                            CreateATodolistActivity.class);
                     intent.putExtra("patient_username", username);
+                    intent.putExtra("save",true);
                     startActivity(intent);
                 }
                 else
@@ -143,6 +135,19 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
             }
         });
 
+        imgBtnMedicalRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.startAnimation(buttonClick);
+                String username = patient.getUsername();
+                Intent intent=new Intent(
+                        TherapistPatientDetailvView.this,
+                        CreateMedicalRecordActivity.class
+                );
+                intent.putExtra("patient_username", username);
+                startActivity(intent);
+            }
+        });
     }
 /*
     @Override
@@ -151,13 +156,14 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
 
     }
 */
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(this,TherapistViewAppointmentActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        Intent intent = new Intent(this,TherapistViewAppointmentActivity.class);
+//        startActivity(intent);
+//        Log.d("AAA"," backpress of appointment");
+//        finish();
+//    }
 
     public void VideoCallPatient(View v)
     {
@@ -172,4 +178,36 @@ public class TherapistPatientDetailvView extends AppCompatActivity {
             Toast.makeText(TherapistPatientDetailvView.this,"Patient is not available, please try again",Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void cancelSuccessful() {
+        Toast.makeText(this,"Cancel appoinment succesful",Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void cancelFail() {
+        Toast.makeText(this,"Cancel appoinment fail, please try again",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setDialog(String username,String date) {
+        DialogInterface.OnClickListener dialog = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        presenter.removeAppointment(username,date);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Confirm Cancellation");
+        alertDialog.setMessage("Are you sure to cancel the appointment?");
+        alertDialog.setPositiveButton("Yes",dialog).setNegativeButton("No",dialog).show();
+
+    }
 }

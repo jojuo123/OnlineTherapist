@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -112,6 +113,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                         }
                     }
                 }
+
                 TableLayout timeSlotTable = (TableLayout) activity.findViewById(R.id.TimeTableTherapist);
                 timeSlotTable.removeAllViews();
 
@@ -143,7 +145,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
 
 
 
-
+                // generate view of appointment and click listener
                 AlphaAnimation buttonClick = new AlphaAnimation(0.5f, 1F);
                 buttonClick.setDuration(300);
                 for (int i = 0; i < timeRowModelTherapists.size(); i++) {
@@ -173,7 +175,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                         c2.setBackground(ContextCompat.getDrawable(activity,R.drawable.available_button));
                     }
                     else {
-                            c2.setBackground(ContextCompat.getDrawable(activity, R.drawable.not_available_button));
+                        c2.setBackground(ContextCompat.getDrawable(activity, R.drawable.not_available_button));
                     }
                     c2.setText(timeRowModelTherapists.get(i).getMorningBook());
 
@@ -207,7 +209,7 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                                         public void onSuccessGetPatientInfo(Patient patient) {
                                             Intent intent = new Intent(activity, TherapistPatientDetailvView.class).putExtra("Patient", patient).putExtra("Date", timeRowModelTherapists.get(t).getDate());
                                             activity.startActivity(intent);
-                                            activity.finish();
+//                                            activity.finish();
 
                                         }
 
@@ -270,8 +272,8 @@ public class TherapistViewAppointmentPresenter implements ITherapistHomePresente
                                     public void onSuccessGetPatientInfo(Patient patient) {
                                         Intent intent = new Intent(activity, TherapistPatientDetailvView.class).putExtra("Patient", patient).putExtra("Date",timeRowModelTherapists.get(t).getDate());
                                         activity.startActivity(intent);
-                                        activity.finish();
-
+//                                        activity.finish();
+                                        Log.d("AAA","get back grom intent");
                                     }
 
                                     @Override

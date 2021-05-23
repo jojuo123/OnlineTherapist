@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import com.example.onlinetherapist.Login.Admin;
 import com.example.onlinetherapist.Login.Patient;
 import com.example.onlinetherapist.Login.UI.LoginActivity;
+import com.example.onlinetherapist.MedicalRecord.MedicalRecordModel;
 import com.example.onlinetherapist.appointment.ViewAppointmentActivity;
 import com.example.onlinetherapist.account.IRegisterPresenter;
 import com.example.onlinetherapist.appointment.IViewAppointmentPresenter;
@@ -600,8 +601,8 @@ public class FirebaseManagement {
                 //Log.d("success", "LO suc");
                 SharedPreferences preferences = activity.getSharedPreferences("checkbox", MODE_PRIVATE);
                 SharedPreferences.Editor editor=preferences.edit();
-                editor.putString("remember","false");
-                editor.putString("remember and login","false");
+                editor.putBoolean("remember",false);
+//                editor.putString("remember and login","false");
                 editor.apply();
                 activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
                 activity.finish();
@@ -637,7 +638,37 @@ public class FirebaseManagement {
         });
     }
 
-    public void getNotes (final String userID, final onReadDataListener listener) {
+    // lấy medical record của 1 patient
+    public void getMedicalRecords (String patientID, onReadDataListener listener){
+        listener.onStart();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot recordInfo = null;
+                snapshot = snapshot.child(Constant.MEDICAL_RECORD_TABLE);
+                for(DataSnapshot traverse: snapshot.getChildren()){
+                    String patientIdDB = "";
+                    patientIdDB = traverse.child(Constant.RECORD_PATIENT_ID).getValue().toString();
+                    if(patientID.equals(patientIdDB)){
+                        recordInfo = traverse;
+                        listener.onSuccess(recordInfo,"One element");
+                    }
+                }
+                listener.onSuccess(null,"Done");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailed(error);
+            }
+        });
+    }
+
+    public void getNotes(final String attri, final onReadDataListener listener){
+        getNotes(attri,listener,"User_ID");
+    }
+
+    public void getNotes (final String attri, final onReadDataListener listener, String attrDB ) {
         listener.onStart();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -645,10 +676,10 @@ public class FirebaseManagement {
                 DataSnapshot noteInformation = null;
                 snapshot = snapshot.child(Constant.NOTE_TABLE);
                 for(DataSnapshot traverse: snapshot.getChildren()){
-                    String userIdDB = "";
-                    userIdDB = traverse.child("User_ID").getValue().toString();
+                    String attriVal = "";
+                    attriVal = traverse.child(attrDB).getValue().toString();
                     long status = (long)traverse.child("Status").getValue();
-                    if(userIdDB.equals(userID)) {
+                    if(attriVal.equals(attri)) {
                         noteInformation = traverse;
                         listener.onSuccess(noteInformation, "One element");
                     }
@@ -733,6 +764,47 @@ public class FirebaseManagement {
                 });
     }
 
+    // up 1 medical record ms
+    public void pushNewMedicalRecord(
+            String therapistID,
+            String patientID,
+            String created_date,
+            String problems,
+            String diagnosis,
+            String treatment,
+            String noteID,
+            String todoListID,
+            onSetValueListener listener
+    ){
+        String timestamp = Long.toString(System.currentTimeMillis());
+        String generated_id = timestamp+"_"+patientID;
+
+        Map<String,Object> info = new HashMap<>();
+        info.put(Constant.RECORD_ID,generated_id);
+        info.put(Constant.RECORD_THERAPIST_ID, therapistID);
+        info.put(Constant.RECORD_PATIENT_ID,patientID);
+        info.put(Constant.RECORD_DATE,created_date);
+        info.put(Constant.RECORD_PROBLEM,problems);
+        info.put(Constant.RECORD_DIAGNOSIS,diagnosis);
+        info.put(Constant.RECORD_TREATMENT,treatment);
+        info.put(Constant.RECORD_NOTE_ID, noteID);
+        info.put(Constant.RECORD_TODOLIST_ID, todoListID);
+
+        databaseReference.child(Constant.MEDICAL_RECORD_TABLE).child(generated_id).setValue(info)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        listener.onSuccess("Success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        listener.onFailed(e,"Failed");
+                    }
+                });
+
+    }
     public void newNote (String created_date, String content, String user_id, onSetValueListener listener) {
         //First, get an id that didn't exists
         //How to get an id that is guaranteed to be non-existent?
@@ -747,11 +819,12 @@ public class FirebaseManagement {
         info.put("Date",created_date);
         info.put("Content", content);
 
+
         databaseReference.child(Constant.NOTE_TABLE).child(generated_id).setValue(info)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        listener.onSuccess("Success");
+                        listener.onSuccess(generated_id);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

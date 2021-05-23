@@ -37,6 +37,7 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
 
         InitVariable();
         Constant.isTherapist = true;
+
         startActivity(new Intent(TherapistHomeActivity.this, Home.class));
         finish();
 
@@ -95,6 +96,7 @@ public class TherapistHomeActivity extends AppCompatActivity implements ITherapi
         Username = saved.getString("username","");
         return Username;
     }
+
     public void onViewAppointmentClicked(){
         therapistHomePresenter.onClickAppointment(this,
                 TherapistViewAppointmentActivity.class, "", "");

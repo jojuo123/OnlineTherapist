@@ -1,6 +1,8 @@
 package com.example.onlinetherapist.noteadvice;
 
-public class TodolistItemModel {
+import java.io.Serializable;
+
+public class TodolistItemModel implements Serializable {
     public TodolistItemModel(String id, String list_id, String content, int status) {
         this.id = id;
         this.list_id = list_id;

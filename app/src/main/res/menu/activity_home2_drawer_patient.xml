@@ -13,9 +13,14 @@
             android:icon="@drawable/ic_person_black_24dp"
             android:title="Your appointment" />
         <item
+            android:id="@+id/nav_records"
+            android:icon="@drawable/ic_baseline_content_paste_24"
+            android:title="Medical records" />
+        <item
             android:id="@+id/nav_todo"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="Todo lists" />
+            android:icon="@drawable/ic_baseline_list_alt_24"
+            android:title="Advices"
+            />
         <item
             android:id="@+id/nav_signout_patient"
             android:icon="@drawable/ic_exit_to_app_black_24dp"

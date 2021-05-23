@@ -16,6 +16,20 @@ public class Constant {
     public static final String THERAPIST_TABLE = "Therapists";
 
 
+    // MEDICAL RECORD TABLE on Firebase
+    public static final String MEDICAL_RECORD_TABLE = "Medical_record";
+    public static final String RECORD_ID = "ID";
+    public static final String RECORD_PATIENT_ID = "PatientID";
+    public static final String RECORD_THERAPIST_ID = "TherapistID";
+    public static final String RECORD_DATE = "Date";
+    public static final String RECORD_PROBLEM = "Problem";
+    public static final String RECORD_DIAGNOSIS = "Diagnosis";
+    public static final String RECORD_TREATMENT = "Treatment";
+    public static final String RECORD_NOTE_ID = "NoteID";
+    public static final String RECORD_TODOLIST_ID = "TodoListID";
+
+
+
 
     public static final String REMOTE_MSG_AUTHORIZATION = "Authorization";
     public static final String REMOTE_MSG_CONTENT_TYPE = "Content-Type";

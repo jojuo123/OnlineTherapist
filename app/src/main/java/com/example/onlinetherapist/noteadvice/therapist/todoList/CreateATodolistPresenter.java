@@ -1,4 +1,4 @@
-package com.example.onlinetherapist.noteadvice.therapist;
+package com.example.onlinetherapist.noteadvice.therapist.todoList;
 
 import com.example.onlinetherapist.FirebaseManagement;
 import com.example.onlinetherapist.noteadvice.TodolistItemModel;
@@ -20,18 +20,24 @@ public class CreateATodolistPresenter implements ICreateATodolistPresenter {
 
 
     @Override
-    public void uploadNewTodolist(TodolistModel todolistModel, List<TodolistItemModel> todolistItemModels) {
-        firebaseManagement.newTodolist(todolistModel, todolistItemModels, new onSetValueListener() {
-            @Override
-            public void onSuccess(String message) {
-                if (message == "todolist_sucess") {
-                    view.finish();
+    public void uploadNewTodolist(TodolistModel todolistModel, List<TodolistItemModel> todolistItemModels, boolean save) {
+        if(!save) {
+            view.setResultFinish();
+        }
+        else{
+            firebaseManagement.newTodolist(todolistModel, todolistItemModels, new onSetValueListener() {
+                @Override
+                public void onSuccess(String message) {
+                    if (message == "todolist_sucess") {
+                        view.finish();
+                    }
                 }
-            }
-            @Override
-            public void onFailed(Exception e, String message) {
+                @Override
+                public void onFailed(Exception e, String message) {
 
-            }
-        });
+                }
+            });
+        }
+
     }
 }
